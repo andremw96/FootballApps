@@ -178,15 +178,13 @@ class DetailActivity : AppCompatActivity(), DetailView {
         Picasso.get().load(data.teamBadge).into(if (homeTeam == true) homelogo else awaylogo)
     }
 
-    private fun addToFavorite() {
-        val date = (SimpleDateFormat("EEE, dd MMM yyyy").format(matches.matchDate)).toString()
-
+    override fun addToFavorite() {
         try {
             database.use {
                 insert(
                     FavoriteMatches.TABLE_FAVORITE_MATCH,
                     FavoriteMatches.MATCH_ID to matches.matchId,
-                    FavoriteMatches.MATCH_DATE to date,
+                    FavoriteMatches.MATCH_DATE to dateFormat.format(matches.matchDate).toString(),
                     FavoriteMatches.HOME_TEAM_ID to matches.idHomeTeam,
                     FavoriteMatches.AWAY_TEAM_ID to matches.idAwayTeam,
                     FavoriteMatches.HOME_TEAM_NAME to matches.homeTeam,
@@ -202,7 +200,7 @@ class DetailActivity : AppCompatActivity(), DetailView {
     }
 
     //fungsi untuk menghapus favorite
-    private fun removeFromFavorite() {
+    override fun removeFromFavorite() {
         try {
             database.use {
                 delete(FavoriteMatches.TABLE_FAVORITE_MATCH, "(MATCH_ID = {id})", "id" to matchID)
@@ -214,7 +212,7 @@ class DetailActivity : AppCompatActivity(), DetailView {
     }
 
     // fungsi untuk menandai match yang favorite
-    private fun setFavorite() {
+    override fun setFavorite() {
         if (isFavorite)
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_added_to_favorites)
         else
@@ -222,7 +220,7 @@ class DetailActivity : AppCompatActivity(), DetailView {
     }
 
 
-    private fun favoriteState() {
+    override fun favoriteState() {
         database.use {
             val result = select(FavoriteMatches.TABLE_FAVORITE_MATCH)
                 .whereArgs(

@@ -8,5 +8,9 @@ interface DetailView {
     fun hideLoading()
     fun getMatch(data: Match)
     fun getTeam(data: Team, homeTeam: Boolean)
+    fun addToFavorite()
+    fun removeFromFavorite()
+    fun setFavorite()
+    fun favoriteState()
 
 }

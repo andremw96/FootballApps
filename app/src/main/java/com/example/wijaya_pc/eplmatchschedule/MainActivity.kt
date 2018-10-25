@@ -34,24 +34,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadFavoritesFragment(savedInstanceState: Bundle?) {
-        if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_container, FavoriteMatchesFragment(), FavoriteMatchesFragment::class.java.simpleName)
                 .commit()
-        }
     }
 
     private fun loadMatchFragment(
         savedInstanceState: Bundle?,
         matchFragment: MatchFragment
     ) {
-        if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_container, matchFragment, MatchFragment::class.java.simpleName)
                 .commit()
-        }
     }
 
 }

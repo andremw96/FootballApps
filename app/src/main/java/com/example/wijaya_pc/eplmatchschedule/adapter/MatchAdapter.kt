@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.wijaya_pc.eplmatchschedule.R.id.*
+import com.example.wijaya_pc.eplmatchschedule.dateFormat
 import com.example.wijaya_pc.eplmatchschedule.model.Match
 import com.example.wijaya_pc.eplmatchschedule.ui.MatchUI
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
-import java.text.SimpleDateFormat
 
 class MatchAdapter(
     private val matches: List<Match>,
@@ -39,7 +39,7 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val matchAwayTeam: TextView = view.find(match_away_team)
 
     fun bindItem(matches: Match, listener: (Match) -> Unit) {
-        matchDate.text = (SimpleDateFormat("EEE, dd MMM yyyy").format(matches.matchDate)).toString()
+        matchDate.text = dateFormat.format(matches.matchDate).toString()
 
         matchHomeTeam.text = matches.homeTeam
         matchHomeScore.text = matches.homeScore
