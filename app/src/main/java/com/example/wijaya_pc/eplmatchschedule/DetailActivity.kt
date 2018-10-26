@@ -1,6 +1,5 @@
 package com.example.wijaya_pc.eplmatchschedule
 
-import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -24,17 +23,20 @@ import com.example.wijaya_pc.eplmatchschedule.ui.DetailMatchUI
 import com.example.wijaya_pc.eplmatchschedule.view.DetailView
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
+import org.jetbrains.anko.ctx
 import org.jetbrains.anko.db.classParser
-import org.jetbrains.anko.db.delete
-import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
-import java.text.SimpleDateFormat
 
 
 class DetailActivity : AppCompatActivity(), DetailView {
+
+    /*companion object {
+        const val dataParcel = "data_parcel"
+    }*/
+
 
     private lateinit var detailView: ScrollView
     private lateinit var progressBar: ProgressBar
@@ -93,7 +95,24 @@ class DetailActivity : AppCompatActivity(), DetailView {
                 true
             }
             add_to_favorite -> {
-                if (isFavorite) removeFromFavorite() else addToFavorite()
+                // if (isFavorite) removeFromFavorite() else addToFavorite()
+
+                if (isFavorite) {
+                    detailPresenter.removeFromFavorite(ctx, matches.matchId)
+                    snackbar(detailView, "Removed from FavoriteMatches").show()
+                } else {
+                    detailPresenter.addToFavorite(
+                        ctx, matches.matchId,
+                        dateToSimpleString(matches.matchDate),
+                        matches.idHomeTeam,
+                        matches.idAwayTeam,
+                        matches.homeTeam,
+                        matches.awayTeam,
+                        matches.homeScore,
+                        matches.awayScore
+                    )
+                    snackbar(detailView, "Added to FavoriteMatches").show()
+                }
 
                 isFavorite = !isFavorite
                 setFavorite()
@@ -105,6 +124,7 @@ class DetailActivity : AppCompatActivity(), DetailView {
 
     }
 
+
     override fun getMatch(data: Match) {
         matches = Match(
             data.matchId,
@@ -114,11 +134,27 @@ class DetailActivity : AppCompatActivity(), DetailView {
             data.homeTeam,
             data.awayTeam,
             data.homeScore,
-            data.awayScore
+            data.awayScore,
+            data.homeFormation,
+            data.awayFormation,
+            data.homeGoals,
+            data.awayGoals,
+            data.homeShots,
+            data.awayShots,
+            data.homeGoalKeeper,
+            data.awayGoalKeeper,
+            data.homeDefence,
+            data.awayDefence,
+            data.homeMidfield,
+            data.awayMidfield,
+            data.homeForward,
+            data.awayForward,
+            data.homeSubstitutes,
+            data.awaySubtitutes
         )
 
         val matchDate: TextView = find(match_date)
-        matchDate.text = (SimpleDateFormat("EEE, dd MMM yyyy").format(data.matchDate)).toString()
+        matchDate.text = dateToSimpleString(data.matchDate)
 
         val hometeam: TextView = find(match_home_team)
         val awayteam: TextView = find(match_away_team)
@@ -178,41 +214,8 @@ class DetailActivity : AppCompatActivity(), DetailView {
         Picasso.get().load(data.teamBadge).into(if (homeTeam == true) homelogo else awaylogo)
     }
 
-    override fun addToFavorite() {
-        try {
-            database.use {
-                insert(
-                    FavoriteMatches.TABLE_FAVORITE_MATCH,
-                    FavoriteMatches.MATCH_ID to matches.matchId,
-                    FavoriteMatches.MATCH_DATE to dateFormat.format(matches.matchDate).toString(),
-                    FavoriteMatches.HOME_TEAM_ID to matches.idHomeTeam,
-                    FavoriteMatches.AWAY_TEAM_ID to matches.idAwayTeam,
-                    FavoriteMatches.HOME_TEAM_NAME to matches.homeTeam,
-                    FavoriteMatches.AWAY_TEAM_NAME to matches.awayTeam,
-                    FavoriteMatches.HOME_TEAM_SCORE to matches.homeScore,
-                    FavoriteMatches.AWAY_TEAM_SCORE to matches.awayScore
-                )
-            }
-            snackbar(detailView, "Added to FavoriteMatches").show()
-        } catch (e: SQLiteConstraintException) {
-            snackbar(detailView, e.localizedMessage).show()
-        }
-    }
-
-    //fungsi untuk menghapus favorite
-    override fun removeFromFavorite() {
-        try {
-            database.use {
-                delete(FavoriteMatches.TABLE_FAVORITE_MATCH, "(MATCH_ID = {id})", "id" to matchID)
-            }
-            snackbar(detailView, "Removed from FavoriteMatches").show()
-        } catch (e: SQLiteConstraintException) {
-            snackbar(detailView, e.localizedMessage).show()
-        }
-    }
-
     // fungsi untuk menandai match yang favorite
-    override fun setFavorite() {
+    private fun setFavorite() {
         if (isFavorite)
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_added_to_favorites)
         else
@@ -220,7 +223,7 @@ class DetailActivity : AppCompatActivity(), DetailView {
     }
 
 
-    override fun favoriteState() {
+    private fun favoriteState() {
         database.use {
             val result = select(FavoriteMatches.TABLE_FAVORITE_MATCH)
                 .whereArgs(

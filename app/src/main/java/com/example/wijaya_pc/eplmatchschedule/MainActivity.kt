@@ -15,16 +15,16 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 tab_last_match -> {
                     val matchFragment = MatchFragment.newInstance(0)
-                    loadMatchFragment(savedInstanceState, matchFragment)
+                    loadMatchFragment(matchFragment)
                 }
 
                 tab_next_match -> {
                     val matchFragment = MatchFragment.newInstance(1)
-                    loadMatchFragment(savedInstanceState, matchFragment)
+                    loadMatchFragment(matchFragment)
                 }
 
                 favorites -> {
-                    loadFavoritesFragment(savedInstanceState)
+                    loadFavoritesFragment()
                 }
             }
             true
@@ -33,17 +33,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun loadFavoritesFragment(savedInstanceState: Bundle?) {
+    private fun loadFavoritesFragment() {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_container, FavoriteMatchesFragment(), FavoriteMatchesFragment::class.java.simpleName)
                 .commit()
     }
 
-    private fun loadMatchFragment(
-        savedInstanceState: Bundle?,
-        matchFragment: MatchFragment
-    ) {
+    private fun loadMatchFragment(matchFragment: MatchFragment) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_container, matchFragment, MatchFragment::class.java.simpleName)

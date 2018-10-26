@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class Team(
     @SerializedName("idTeam")
-    var teamId: String? = null,
+    var teamId: String? ,
 
     @SerializedName("strTeam")
-    var teamName: String? = null,
+    var teamName: String? ,
 
     @SerializedName("strTeamBadge")
-    var teamBadge: String? = null
+    var teamBadge: String?
 )

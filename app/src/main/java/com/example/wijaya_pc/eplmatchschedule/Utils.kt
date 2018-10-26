@@ -2,6 +2,7 @@ package com.example.wijaya_pc.eplmatchschedule
 
 import android.view.View
 import java.text.SimpleDateFormat
+import java.util.*
 
 //untuk menampilkan ProgressBar
 fun View.visible() {
@@ -13,4 +14,6 @@ fun View.invisible() {
     visibility = View.INVISIBLE
 }
 
-val dateFormat = SimpleDateFormat("EEE, dd MMM yyyy")
+fun dateToSimpleString(date: Date?): String? = with(date ?: Date()) {
+    SimpleDateFormat("EEE, dd MMM yyyy").format(this)
+}

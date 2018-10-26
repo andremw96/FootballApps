@@ -69,6 +69,7 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context> {
                     )
 
                     listFav = recyclerView {
+                        id = R.id.listFav
                         lparams(width = matchParent, height = wrapContent)
                         layoutManager = LinearLayoutManager(ctx)
                     }

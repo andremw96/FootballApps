@@ -1,6 +1,7 @@
 package com.example.wijaya_pc.eplmatchschedule
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -56,6 +57,10 @@ class MatchFragment() : Fragment(), AnkoComponent<Context>, MainView {
                 "homeTeamId" to "${it.idHomeTeam}",
                 "awayTeamId" to "${it.idAwayTeam}"
             )
+
+           /* val intent = Intent(ctx, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.matchParcel, it)
+            startActivity(intent)*/
         }
         listMatch.adapter = adapter
 
@@ -103,6 +108,7 @@ class MatchFragment() : Fragment(), AnkoComponent<Context>, MainView {
                     lparams(width = matchParent, height = wrapContent)
 
                     listMatch = recyclerView {
+                        id = R.id.listMatch
                         lparams(width = matchParent, height = wrapContent)
                         layoutManager = LinearLayoutManager(ctx)
                     }
