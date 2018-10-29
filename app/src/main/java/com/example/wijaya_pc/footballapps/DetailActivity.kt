@@ -33,9 +33,9 @@ import org.jetbrains.anko.setContentView
 
 class DetailActivity : AppCompatActivity(), DetailView {
 
-    /*companion object {
+    companion object {
         const val dataParcel = "data_parcel"
-    }*/
+    }
 
 
     private lateinit var detailView: ScrollView
