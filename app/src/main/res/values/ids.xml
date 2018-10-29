@@ -30,6 +30,7 @@
     <item name="detail_view" type="id"/>
     <item name="listMatch" type="id"/>
     <item name="listFav" type="id"/>
+    <item name="tab_match" type="id"/>
 
 
 </resources>

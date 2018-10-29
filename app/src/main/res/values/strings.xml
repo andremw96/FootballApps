@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">EPL Match Schedule</string>
+    <string name="app_name">Football Apps</string>
     <string name="vs_string">vs</string>
     <string name="next_match">Next Match</string>
     <string name="last_match">Last Match</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="lineups">Lineups</string>
     <string name="home_team">Home Team</string>
     <string name="away_team">Away Team</string>
