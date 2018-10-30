@@ -5,13 +5,13 @@ import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
-import com.example.wijaya_pc.footballapps.DetailActivity
+import com.example.wijaya_pc.footballapps.feature.match.DetailMatchActivity
 import com.example.wijaya_pc.footballapps.R
 import org.jetbrains.anko.*
 
-class DetailMatchUI : AnkoComponent<DetailActivity> {
+class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
-    override fun createView(ui: AnkoContext<DetailActivity>): View = with(ui) {
+    override fun createView(ui: AnkoContext<DetailMatchActivity>): View = with(ui) {
 
         relativeLayout {
             lparams(width = matchParent)

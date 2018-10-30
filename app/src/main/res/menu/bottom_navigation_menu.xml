@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-            android:id="@+id/tab_last_match"
+            android:id="@+id/tab_matches"
             android:enabled="true"
-            android:title="@string/last_match"
-            android:icon="@drawable/ic_last_match"
+            android:title="@string/matches"
+            android:icon="@drawable/ic_matches"
             app:showAsAction="ifRoom"/>
 
-    <item
-            android:id="@+id/tab_next_match"
-            android:enabled="true"
-            android:title="@string/next_match"
-            android:icon="@drawable/ic_next_match"
-            app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/tab_teams"
+          android:enabled="true"
+          android:title="@string/teams"
+          android:icon="@drawable/ic_workers"
+          app:showAsAction="ifRoom" />
 
     <item
             android:id="@+id/favorites"

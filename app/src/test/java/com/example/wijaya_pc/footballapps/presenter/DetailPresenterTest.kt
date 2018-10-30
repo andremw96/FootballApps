@@ -7,7 +7,7 @@ import com.example.wijaya_pc.footballapps.model.Match
 import com.example.wijaya_pc.footballapps.model.MatchResponse
 import com.example.wijaya_pc.footballapps.model.Team
 import com.example.wijaya_pc.footballapps.model.TeamResponse
-import com.example.wijaya_pc.footballapps.view.DetailView
+import com.example.wijaya_pc.footballapps.view.DetailMatchView
 import com.google.gson.Gson
 import org.junit.Before
 import org.junit.Test
@@ -21,7 +21,7 @@ class DetailPresenterTest {
 
     @Mock
     private
-    lateinit var view: DetailView
+    lateinit var view: DetailMatchView
 
     @Mock
     private
@@ -31,12 +31,12 @@ class DetailPresenterTest {
     private
     lateinit var gson: Gson
 
-    private lateinit var presenter: DetailPresenter
+    private lateinit var presenter: DetailMatchPresenter
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        presenter = DetailPresenter(view, apiRepository, gson, TestContextProvider())
+        presenter = DetailMatchPresenter(view, apiRepository, gson, TestContextProvider())
     }
 
     @Test

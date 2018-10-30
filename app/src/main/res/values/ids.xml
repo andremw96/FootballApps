@@ -31,6 +31,15 @@
     <item name="listMatch" type="id"/>
     <item name="listFav" type="id"/>
     <item name="tab_match" type="id"/>
+    <item name="team_badge" type="id"/>
+    <item name="team_name" type="id"/>
+    <item name="swipeRefreshDetailTeam" type="id"/>
+    <item name="progressBarDetailTeam" type="id"/>
+    <item name="team_badgeDetailTeam" type="id"/>
+    <item name="team_nameDetailTeam" type="id"/>
+    <item name="team_formedyearDetailTeam" type="id"/>
+    <item name="team_stadiumDetailTeam" type="id"/>
+    <item name="team_descDetailTeam" type="id"/>
 
 
 </resources>

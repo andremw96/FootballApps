@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import com.example.wijaya_pc.footballapps.R.color.colorAccent
 import com.example.wijaya_pc.footballapps.adapter.FavoriteMatchesAdapter
 import com.example.wijaya_pc.footballapps.database.database
+import com.example.wijaya_pc.footballapps.feature.match.DetailMatchActivity
 import com.example.wijaya_pc.footballapps.model.FavoriteMatches
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
@@ -33,7 +34,7 @@ class FavoriteMatchesFragment : Fragment(), AnkoComponent<Context> {
         super.onActivityCreated(savedInstanceState)
 
         adapter = FavoriteMatchesAdapter(favorites) {
-            ctx.startActivity<DetailActivity>(
+            ctx.startActivity<DetailMatchActivity>(
                 "id" to "${it.matchId}",
                 "homeTeamId" to "${it.homeTeamId}",
                 "awayTeamId" to "${it.awayTeamId}"

@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.wijaya_pc.eplmatchschedule"
+        applicationId "com.example.wijaya_pc.footballapps"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1

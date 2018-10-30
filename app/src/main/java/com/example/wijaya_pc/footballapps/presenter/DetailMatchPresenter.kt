@@ -10,7 +10,7 @@ import com.example.wijaya_pc.footballapps.database.database
 import com.example.wijaya_pc.footballapps.model.FavoriteMatches
 import com.example.wijaya_pc.footballapps.model.MatchResponse
 import com.example.wijaya_pc.footballapps.model.TeamResponse
-import com.example.wijaya_pc.footballapps.view.DetailView
+import com.example.wijaya_pc.footballapps.view.DetailMatchView
 import com.google.gson.Gson
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.coroutines.experimental.bg
@@ -18,8 +18,8 @@ import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 
 
-class DetailPresenter(
-    private val view: DetailView,
+class DetailMatchPresenter(
+    private val view: DetailMatchView,
     private val apiRepository: ApiRepository,
     private val gson: Gson,
     private val context: CoroutineContextProvider = CoroutineContextProvider()

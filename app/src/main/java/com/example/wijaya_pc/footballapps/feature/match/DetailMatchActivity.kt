@@ -1,4 +1,4 @@
-package com.example.wijaya_pc.footballapps
+package com.example.wijaya_pc.footballapps.feature.match
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -15,12 +15,15 @@ import com.example.wijaya_pc.footballapps.R.id.*
 import com.example.wijaya_pc.footballapps.R.menu.detail_menu
 import com.example.wijaya_pc.footballapps.api.ApiRepository
 import com.example.wijaya_pc.footballapps.database.database
+import com.example.wijaya_pc.footballapps.dateToSimpleString
+import com.example.wijaya_pc.footballapps.invisible
 import com.example.wijaya_pc.footballapps.model.FavoriteMatches
 import com.example.wijaya_pc.footballapps.model.Match
 import com.example.wijaya_pc.footballapps.model.Team
-import com.example.wijaya_pc.footballapps.presenter.DetailPresenter
+import com.example.wijaya_pc.footballapps.presenter.DetailMatchPresenter
 import com.example.wijaya_pc.footballapps.ui.DetailMatchUI
-import com.example.wijaya_pc.footballapps.view.DetailView
+import com.example.wijaya_pc.footballapps.view.DetailMatchView
+import com.example.wijaya_pc.footballapps.visible
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.ctx
@@ -31,7 +34,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
 
 
-class DetailActivity : AppCompatActivity(), DetailView {
+class DetailMatchActivity : AppCompatActivity(), DetailMatchView {
 
     companion object {
         const val dataParcel = "data_parcel"
@@ -41,7 +44,7 @@ class DetailActivity : AppCompatActivity(), DetailView {
     private lateinit var detailView: ScrollView
     private lateinit var progressBar: ProgressBar
 
-    private lateinit var detailPresenter: DetailPresenter
+    private lateinit var detailPresenter: DetailMatchPresenter
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
 
@@ -69,7 +72,7 @@ class DetailActivity : AppCompatActivity(), DetailView {
 
         val request = ApiRepository()
         val gson = Gson()
-        detailPresenter = DetailPresenter(this, request, gson)
+        detailPresenter = DetailMatchPresenter(this, request, gson)
 
         detailPresenter.getMatchDetail(matchID)
 
