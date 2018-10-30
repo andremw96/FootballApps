@@ -40,6 +40,7 @@
     <item name="team_formedyearDetailTeam" type="id"/>
     <item name="team_stadiumDetailTeam" type="id"/>
     <item name="team_descDetailTeam" type="id"/>
+    <item name="match_time" type="id"/>
 
 
 </resources>

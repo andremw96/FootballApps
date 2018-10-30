@@ -14,7 +14,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
 class FavoriteMatchesAdapter(
-    private val favorite: List<FavoriteMatches>,
+    private val favorite: MutableList<FavoriteMatches>,
     private val listener: (FavoriteMatches) -> Unit
 ) : RecyclerView.Adapter<FavoriteViewHolder>() {
 
@@ -46,6 +46,7 @@ class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         homeTeamScore.text = favorite.homeTeamScore
         awayTeamScore.text = favorite.awayTeamScore
         awayTeamName.text = favorite.awayTeamName
+
 
         itemView.onClick { listener(favorite) }
     }

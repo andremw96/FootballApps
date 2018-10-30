@@ -2,10 +2,10 @@ package com.example.wijaya_pc.footballapps.feature.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.example.wijaya_pc.footballapps.FavoriteMatchesFragment
 import com.example.wijaya_pc.footballapps.feature.match.MatchFragment
 import com.example.wijaya_pc.footballapps.R
 import com.example.wijaya_pc.footballapps.R.id.*
+import com.example.wijaya_pc.footballapps.feature.favoritematch.FavoriteFragment
 import com.example.wijaya_pc.footballapps.feature.team.TeamsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 .beginTransaction()
                 .replace(
                     R.id.main_container,
-                    FavoriteMatchesFragment(), FavoriteMatchesFragment::class.java.simpleName)
+                    FavoriteFragment(), FavoriteFragment::class.java.simpleName)
                 .commit()
     }
 

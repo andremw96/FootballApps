@@ -1,4 +1,4 @@
-package com.example.wijaya_pc.footballapps.adapter
+package com.example.wijaya_pc.footballapps.adapter.pager
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

@@ -12,6 +12,8 @@ import com.example.wijaya_pc.footballapps.model.Match
 import com.example.wijaya_pc.footballapps.ui.MatchUI
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 
 class MatchAdapter(
     private val matches: List<Match>,
@@ -33,13 +35,16 @@ class MatchAdapter(
 class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val matchDate: TextView = view.find(match_date)
+    private val matchTime: TextView = view.find(match_time)
     private val matchHomeTeam: TextView = view.find(match_home_team)
     private val matchHomeScore: TextView = view.find(match_home_score)
     private val matchAwayScore: TextView = view.find(match_away_score)
     private val matchAwayTeam: TextView = view.find(match_away_team)
 
     fun bindItem(matches: Match, listener: (Match) -> Unit) {
+
         matchDate.text = dateToSimpleString(matches.matchDate)
+        matchTime.text =  (matches.matchTime)!!.substring(0, 5)
 
         matchHomeTeam.text = matches.homeTeam
         matchHomeScore.text = matches.homeScore

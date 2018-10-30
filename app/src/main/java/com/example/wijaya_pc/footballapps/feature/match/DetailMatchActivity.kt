@@ -132,6 +132,7 @@ class DetailMatchActivity : AppCompatActivity(), DetailMatchView {
         matches = Match(
             data.matchId,
             data.matchDate,
+            data.matchTime,
             data.idHomeTeam,
             data.idAwayTeam,
             data.homeTeam,

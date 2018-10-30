@@ -9,6 +9,7 @@ import java.util.*
 data class Match(
     @SerializedName("idEvent") var matchId: String? ,
     @SerializedName("dateEvent") var matchDate: Date? ,
+    @SerializedName("strTime") var matchTime: String?,
     @SerializedName("idHomeTeam") var idHomeTeam: String? ,
     @SerializedName("idAwayTeam") var idAwayTeam: String? ,
     @SerializedName("strHomeTeam") var homeTeam: String? ,

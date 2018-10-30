@@ -17,12 +17,24 @@ class MatchUI : AnkoComponent<ViewGroup> {
 
             cardView {
 
-                textView {
-                    id = R.id.match_date
-                    textSize = 12f
-                    textColor = Color.GREEN
-                    gravity = Gravity.CENTER_HORIZONTAL
+                linearLayout {
+                    orientation = LinearLayout.VERTICAL
+
+                    textView {
+                        id = R.id.match_date
+                        textSize = 12f
+                        textColor = Color.GREEN
+                        gravity = Gravity.CENTER_HORIZONTAL
+                    }
+
+                    textView {
+                        id = R.id.match_time
+                        textSize = 12f
+                        textColor = Color.RED
+                        gravity = Gravity.CENTER_HORIZONTAL
+                    }
                 }
+
 
                 linearLayout {
                     lparams(width = matchParent)

@@ -7,16 +7,15 @@ import com.example.wijaya_pc.footballapps.api.ApiRepository
 import com.example.wijaya_pc.footballapps.api.TheSportDBApi
 import com.example.wijaya_pc.footballapps.coroutine.CoroutineContextProvider
 import com.example.wijaya_pc.footballapps.database.databaseTeam
+import com.example.wijaya_pc.footballapps.feature.favoritematch.ListFavoriteFragment
 import com.example.wijaya_pc.footballapps.model.FavoriteTeams
 import com.example.wijaya_pc.footballapps.model.TeamResponse
 import com.example.wijaya_pc.footballapps.view.DetailTeamView
 import com.google.gson.Gson
-import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.coroutines.experimental.bg
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
-import org.jetbrains.anko.design.snackbar
 
 class DetailTeamPresenter(private val view: DetailTeamView,
                           private val apiRepository: ApiRepository,
