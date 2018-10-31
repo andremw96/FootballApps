@@ -41,6 +41,33 @@
     <item name="team_stadiumDetailTeam" type="id"/>
     <item name="team_descDetailTeam" type="id"/>
     <item name="match_time" type="id"/>
+    <item name="detail_match_date" type="id"/>
+    <item name="detail_match_time" type="id"/>
+    <item name="detail_home_logo" type="id"/>
+    <item name="detail_match_home_team" type="id"/>
+    <item name="detail_match_home_score" type="id"/>
+    <item name="detail_match_away_score" type="id"/>
+    <item name="detail_away_logo" type="id"/>
+    <item name="detail_match_away_team" type="id"/>
+    <item name="detail_match_home_goals" type="id"/>
+    <item name="detail_match_away_goals" type="id"/>
+    <item name="detail_match_home_shots" type="id"/>
+    <item name="detail_match_away_shots" type="id"/>
+    <item name="detail_match_home_formation" type="id"/>
+    <item name="detail_match_away_formation" type="id"/>
+    <item name="detail_match_home_goalkeeper" type="id"/>
+    <item name="detail_match_away_goalkeeper" type="id"/>
+    <item name="detail_match_home_defense" type="id"/>
+    <item name="detail_match_away_defense" type="id"/>
+    <item name="detail_match_home_midfield" type="id"/>
+    <item name="detail_match_away_midfield" type="id"/>
+    <item name="detail_match_home_forward" type="id"/>
+    <item name="detail_match_away_forward" type="id"/>
+    <item name="detail_match_home_subs" type="id"/>
+    <item name="detail_match_away_subs" type="id"/>
+    <item name="detail_team_UI" type="id"/>
+    <item name="tabs_detail_team" type="id"/>
+    <item name="viewpager_detail_team" type="id"/>
 
 
 </resources>

@@ -9,21 +9,19 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.ScrollView
 import android.widget.TextView
+import com.example.wijaya_pc.footballapps.*
 import com.example.wijaya_pc.footballapps.R.drawable.ic_add_to_favorites
 import com.example.wijaya_pc.footballapps.R.drawable.ic_added_to_favorites
 import com.example.wijaya_pc.footballapps.R.id.*
 import com.example.wijaya_pc.footballapps.R.menu.detail_menu
 import com.example.wijaya_pc.footballapps.api.ApiRepository
 import com.example.wijaya_pc.footballapps.database.database
-import com.example.wijaya_pc.footballapps.dateToSimpleString
-import com.example.wijaya_pc.footballapps.invisible
 import com.example.wijaya_pc.footballapps.model.FavoriteMatches
 import com.example.wijaya_pc.footballapps.model.Match
 import com.example.wijaya_pc.footballapps.model.Team
 import com.example.wijaya_pc.footballapps.presenter.DetailMatchPresenter
 import com.example.wijaya_pc.footballapps.ui.DetailMatchUI
 import com.example.wijaya_pc.footballapps.view.DetailMatchView
-import com.example.wijaya_pc.footballapps.visible
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.ctx
@@ -107,6 +105,7 @@ class DetailMatchActivity : AppCompatActivity(), DetailMatchView {
                     detailPresenter.addToFavorite(
                         ctx, matches.matchId,
                         dateToSimpleString(matches.matchDate),
+                        timeToSimpleString(timeToGMT(matches.matchTime)),
                         matches.idHomeTeam,
                         matches.idAwayTeam,
                         matches.homeTeam,
@@ -157,64 +156,67 @@ class DetailMatchActivity : AppCompatActivity(), DetailMatchView {
             data.awaySubtitutes
         )
 
-        val matchDate: TextView = find(match_date)
+        val matchDate: TextView = find(detail_match_date)
         matchDate.text = dateToSimpleString(data.matchDate)
 
-        val hometeam: TextView = find(match_home_team)
-        val awayteam: TextView = find(match_away_team)
+        val matchTime: TextView = find(detail_match_time)
+        matchTime.text = timeToSimpleString(timeToGMT(data.matchTime))
+
+        val hometeam: TextView = find(detail_match_home_team)
+        val awayteam: TextView = find(detail_match_away_team)
         hometeam.text = data.homeTeam
         awayteam.text = data.awayTeam
 
-        val homescore: TextView = find(match_home_score)
-        val awayscore: TextView = find(match_away_score)
+        val homescore: TextView = find(detail_match_home_score)
+        val awayscore: TextView = find(detail_match_away_score)
         homescore.text = data.homeScore
         awayscore.text = data.awayScore
 
-        val homegoals: TextView = find(match_home_goals)
-        val awaygoals: TextView = find(match_away_goals)
+        val homegoals: TextView = find(detail_match_home_goals)
+        val awaygoals: TextView = find(detail_match_away_goals)
         homegoals.text = data.homeGoals
         awaygoals.text = data.awayGoals
 
-        val homeshots: TextView = find(match_home_shots)
-        val awayshots: TextView = find(match_away_shots)
+        val homeshots: TextView = find(detail_match_home_shots)
+        val awayshots: TextView = find(detail_match_away_shots)
         homeshots.text = data.homeShots
         awayshots.text = data.awayShots
 
-        val homeformation: TextView = find(match_home_formation)
-        val awayformation: TextView = find(match_away_formation)
+        val homeformation: TextView = find(detail_match_home_formation)
+        val awayformation: TextView = find(detail_match_away_formation)
         homeformation.text = data.homeFormation
         awayformation.text = data.awayFormation
 
-        val homegoalkeeper: TextView = find(match_home_goalkeeper)
-        val awaygoalkeeper: TextView = find(match_away_goalkeeper)
+        val homegoalkeeper: TextView = find(detail_match_home_goalkeeper)
+        val awaygoalkeeper: TextView = find(detail_match_away_goalkeeper)
         homegoalkeeper.text = data.homeGoalKeeper
         awaygoalkeeper.text = data.awayGoalKeeper
 
-        val homedefense: TextView = find(match_home_defense)
-        val awaydefense: TextView = find(match_away_defense)
+        val homedefense: TextView = find(detail_match_home_defense)
+        val awaydefense: TextView = find(detail_match_away_defense)
         homedefense.text = data.homeDefence
         awaydefense.text = data.awayDefence
 
-        val homemidfield: TextView = find(match_home_midfield)
-        val awaymidfield: TextView = find(match_away_midfield)
+        val homemidfield: TextView = find(detail_match_home_midfield)
+        val awaymidfield: TextView = find(detail_match_away_midfield)
         homemidfield.text = data.homeMidfield
         awaymidfield.text = data.awayMidfield
 
-        val homeforward: TextView = find(match_home_forward)
-        val awayforward: TextView = find(match_away_forward)
+        val homeforward: TextView = find(detail_match_home_forward)
+        val awayforward: TextView = find(detail_match_away_forward)
         homeforward.text = data.homeForward
         awayforward.text = data.awayForward
 
-        val homesubs: TextView = find(match_home_subs)
-        val awaysubs: TextView = find(match_away_subs)
+        val homesubs: TextView = find(detail_match_home_subs)
+        val awaysubs: TextView = find(detail_match_away_subs)
         homesubs.text = data.homeSubstitutes
         awaysubs.text = data.awaySubtitutes
     }
 
 
     override fun getTeam(data: Team, homeTeam: Boolean) {
-        val homelogo: ImageView = find(home_logo)
-        val awaylogo: ImageView = find(away_logo)
+        val homelogo: ImageView = find(detail_home_logo)
+        val awaylogo: ImageView = find(detail_away_logo)
         Picasso.get().load(data.teamBadge).into(if (homeTeam == true) homelogo else awaylogo)
     }
 

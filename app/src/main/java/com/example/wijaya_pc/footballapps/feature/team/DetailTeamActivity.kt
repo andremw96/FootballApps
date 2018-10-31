@@ -3,18 +3,22 @@ package com.example.wijaya_pc.footballapps.feature.team
 import android.R
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewPager
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.wijaya_pc.footballapps.R.drawable.ic_add_to_favorites
 import com.example.wijaya_pc.footballapps.R.drawable.ic_added_to_favorites
 import com.example.wijaya_pc.footballapps.R.id.*
 import com.example.wijaya_pc.footballapps.R.menu.detail_menu
+import com.example.wijaya_pc.footballapps.adapter.pager.DetailTeamPagerAdapter
 import com.example.wijaya_pc.footballapps.api.ApiRepository
 import com.example.wijaya_pc.footballapps.database.database
 import com.example.wijaya_pc.footballapps.database.databaseTeam
@@ -28,20 +32,23 @@ import com.example.wijaya_pc.footballapps.view.DetailTeamView
 import com.example.wijaya_pc.footballapps.visible
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.abc_dialog_title_material.view.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.design.tabItem
 import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.support.v4.onRefresh
+import org.jetbrains.anko.toast
 
 class DetailTeamActivity : AppCompatActivity(), DetailTeamView {
 
-    private lateinit var swipeRefresh : SwipeRefreshLayout
     private lateinit var progressBar : ProgressBar
+    private lateinit var linearLayout: LinearLayout
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
 
@@ -49,27 +56,25 @@ class DetailTeamActivity : AppCompatActivity(), DetailTeamView {
     private lateinit var teamName: TextView
     private lateinit var teamFormedYear: TextView
     private lateinit var teamStadium: TextView
-    private lateinit var teamDescription: TextView
 
     private lateinit var presenter: DetailTeamPresenter
     private lateinit var teams: Team
     private lateinit var id: String
+    private lateinit var teamDescription: String
+
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager
+    private lateinit var mDetailTeamPagerAdapter: DetailTeamPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DetailTeamUI().setContentView(this)
 
-        swipeRefresh = find(swipeRefreshDetailTeam)
-        progressBar = find(progressBarDetailTeam)
-        teamBadge = find(team_badgeDetailTeam)
-        teamName = find(team_nameDetailTeam)
-        teamFormedYear = find(team_formedyearDetailTeam)
-        teamStadium = find(team_stadiumDetailTeam)
-        teamDescription = find(team_descDetailTeam)
-
-
         val intent = intent
         id = intent.getStringExtra("id")
+        teamDescription = intent.getStringExtra("desc")
+
+        castingObjectFromUI()
 
         // nambah toolbar judul dan tombol back
         supportActionBar?.title = "Team Detail"
@@ -81,10 +86,29 @@ class DetailTeamActivity : AppCompatActivity(), DetailTeamView {
         val gson = Gson()
         presenter = DetailTeamPresenter(this, request, gson)
         presenter.getTeamDetail(id)
+    }
 
-        swipeRefresh.onRefresh {
-            presenter.getTeamDetail(id)
-        }
+    private fun castingObjectFromUI() {
+        linearLayout = find(detail_team_UI)
+        progressBar = find(progressBarDetailTeam)
+        teamBadge = find(team_badgeDetailTeam)
+        teamName = find(team_nameDetailTeam)
+        teamFormedYear = find(team_formedyearDetailTeam)
+        teamStadium = find(team_stadiumDetailTeam)
+
+        tabLayout = find(tabs_detail_team)
+        viewPager = find(viewpager_detail_team)
+
+        tabLayout.addTab(tabLayout.newTab().setText("Overview"))
+        tabLayout.addTab(tabLayout.newTab().setText("Players"))
+
+        mDetailTeamPagerAdapter = DetailTeamPagerAdapter(supportFragmentManager)
+        mDetailTeamPagerAdapter.addFrag(OverviewTeamFragment.newInstance(teamDescription), "Overview")
+        mDetailTeamPagerAdapter.addFrag(PlayersTeamFragment(), "Players")
+
+        viewPager.adapter = mDetailTeamPagerAdapter
+        viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
+        tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
 
     }
 
@@ -107,7 +131,7 @@ class DetailTeamActivity : AppCompatActivity(), DetailTeamView {
 
                 if (isFavorite) {
                     presenter.removeFromFavoriteTeam(ctx, teams.teamId)
-                    snackbar(swipeRefresh, "Removed from FavoriteTeams").show()
+                    snackbar(linearLayout, "Removed from FavoriteTeams").show()
                 }
                 else {
                     presenter.addToFavoriteTeam(ctx,
@@ -118,7 +142,7 @@ class DetailTeamActivity : AppCompatActivity(), DetailTeamView {
                         teams.teamStadium,
                         teams.teamDescription
                     )
-                    snackbar(swipeRefresh, "Added to FavoriteTeams").show()
+                    snackbar(linearLayout, "Added to FavoriteTeams").show()
                 }
 
                 isFavorite = !isFavorite
@@ -146,12 +170,12 @@ class DetailTeamActivity : AppCompatActivity(), DetailTeamView {
             data[0].teamStadium,
             data[0].teamDescription)
 
-        swipeRefresh.isRefreshing = false
         Picasso.get().load(data[0].teamBadge).into(teamBadge)
         teamName.text = data[0].teamName
-        teamDescription.text = data[0].teamDescription
         teamFormedYear.text = data[0].teamFormedYear
         teamStadium.text = data[0].teamStadium
+
+        //teamDescription = data[0].teamDescription.toString()
     }
 
     // fungsi untuk menandai tim yang favorite

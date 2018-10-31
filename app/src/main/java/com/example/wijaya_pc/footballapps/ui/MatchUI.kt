@@ -18,6 +18,7 @@ class MatchUI : AnkoComponent<ViewGroup> {
             cardView {
 
                 linearLayout {
+                    lparams(width = matchParent)
                     orientation = LinearLayout.VERTICAL
 
                     textView {

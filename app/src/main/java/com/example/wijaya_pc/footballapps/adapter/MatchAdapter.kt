@@ -9,6 +9,8 @@ import android.widget.TextView
 import com.example.wijaya_pc.footballapps.R.id.*
 import com.example.wijaya_pc.footballapps.dateToSimpleString
 import com.example.wijaya_pc.footballapps.model.Match
+import com.example.wijaya_pc.footballapps.timeToGMT
+import com.example.wijaya_pc.footballapps.timeToSimpleString
 import com.example.wijaya_pc.footballapps.ui.MatchUI
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
@@ -44,7 +46,7 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bindItem(matches: Match, listener: (Match) -> Unit) {
 
         matchDate.text = dateToSimpleString(matches.matchDate)
-        matchTime.text =  (matches.matchTime)!!.substring(0, 5)
+        matchTime.text = timeToSimpleString(timeToGMT(matches.matchTime))
 
         matchHomeTeam.text = matches.homeTeam
         matchHomeScore.text = matches.homeScore

@@ -26,7 +26,13 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                     //match date
                     textView {
-                        id = R.id.match_date
+                        id = R.id.detail_match_date
+                        gravity = Gravity.CENTER
+                    }.lparams(width = matchParent)
+
+                    //match time
+                    textView {
+                        id = R.id.detail_match_time
                         gravity = Gravity.CENTER
                     }.lparams(width = matchParent)
 
@@ -38,12 +44,12 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                             // home
                             imageView {
-                                id = R.id.home_logo
+                                id = R.id.detail_home_logo
                                 setImageResource(R.drawable.img_default)
                             }.lparams(width = matchParent, height = dip(75))
 
                             textView(R.string.home_team) {
-                                id = R.id.match_home_team
+                                id = R.id.detail_match_home_team
                                 gravity = Gravity.CENTER
                                 textColor = ContextCompat.getColor(ctx, R.color.colorPrimary)
                             }.lparams(width = matchParent)
@@ -54,7 +60,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // scoring
                         textView {
-                            id = R.id.match_home_score
+                            id = R.id.detail_match_home_score
                             gravity = Gravity.CENTER
                             typeface = Typeface.DEFAULT_BOLD
                         }.lparams(width = wrapContent) {
@@ -71,7 +77,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
                         }
 
                         textView {
-                            id = R.id.match_away_score
+                            id = R.id.detail_match_away_score
                             gravity = Gravity.CENTER
                             typeface = Typeface.DEFAULT_BOLD
                         }.lparams(width = wrapContent) {
@@ -84,12 +90,12 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                             //away
                             imageView {
-                                id = R.id.away_logo
+                                id = R.id.detail_away_logo
                                 setImageResource(R.drawable.img_default)
                             }.lparams(width = matchParent, height = dip(75))
 
                             textView(R.string.away_team) {
-                                id = R.id.match_away_team
+                                id = R.id.detail_match_away_team
                                 gravity = Gravity.CENTER
                                 textColor = ContextCompat.getColor(ctx, R.color.colorPrimary)
                             }.lparams(width = matchParent, height = matchParent)
@@ -113,7 +119,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // home team goals
                         textView {
-                            id = R.id.match_home_goals
+                            id = R.id.detail_match_home_goals
                         }.lparams(width = dip(0), weight = 1F)
 
                         textView(R.string.goals) {
@@ -123,7 +129,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // away team goals
                         textView {
-                            id = R.id.match_away_goals
+                            id = R.id.detail_match_away_goals
                         }.lparams(width = dip(0), weight = 1F)
 
                     }.lparams(width = matchParent)
@@ -133,7 +139,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // home shots
                         textView {
-                            id = R.id.match_home_shots
+                            id = R.id.detail_match_home_shots
                         }.lparams(width = dip(0), weight = 1F)
 
                         textView(R.string.shots) {
@@ -143,7 +149,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // away shots
                         textView {
-                            id = R.id.match_away_shots
+                            id = R.id.detail_match_away_shots
                             gravity = Gravity.RIGHT
                         }.lparams(width = dip(0), weight = 1F)
 
@@ -164,7 +170,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // home formation
                         textView {
-                            id = R.id.match_home_formation
+                            id = R.id.detail_match_home_formation
                         }.lparams(width = dip(0), weight = 1F)
 
                         //Lineups String
@@ -174,7 +180,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // away formation
                         textView {
-                            id = R.id.match_away_formation
+                            id = R.id.detail_match_away_formation
                         }.lparams(width = dip(0), weight = 1F)
 
                     }.lparams(width = matchParent) {
@@ -187,7 +193,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // home goalkeeper
                         textView {
-                            id = R.id.match_home_goalkeeper
+                            id = R.id.detail_match_home_goalkeeper
                         }.lparams(width = dip(0), weight = 1F)
 
                         textView(R.string.goal_keeper) {
@@ -197,7 +203,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // away goalkeeper
                         textView {
-                            id = R.id.match_away_goalkeeper
+                            id = R.id.detail_match_away_goalkeeper
                         }.lparams(width = dip(0), weight = 1F)
 
                     }.lparams(width = matchParent) {
@@ -209,7 +215,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // home defense
                         textView {
-                            id = R.id.match_home_defense
+                            id = R.id.detail_match_home_defense
                         }.lparams(width = dip(0), weight = 1f)
 
                         textView(R.string.defense) {
@@ -219,7 +225,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // away defense
                         textView {
-                            id = R.id.match_away_defense
+                            id = R.id.detail_match_away_defense
                         }.lparams(width = dip(0), weight = 1F)
 
                     }.lparams(width = matchParent) {
@@ -231,7 +237,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // home midfield
                         textView {
-                            id = R.id.match_home_midfield
+                            id = R.id.detail_match_home_midfield
                         }.lparams(width = dip(0), weight = 1F)
 
                         textView(R.string.midfield) {
@@ -241,7 +247,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // away midfield
                         textView {
-                            id = R.id.match_away_midfield
+                            id = R.id.detail_match_away_midfield
                         }.lparams(width = dip(0), weight = 1F)
 
                     }.lparams(width = matchParent) {
@@ -253,7 +259,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // home forward
                         textView {
-                            id = R.id.match_home_forward
+                            id = R.id.detail_match_home_forward
                         }.lparams(width = dip(0), weight = 1F)
 
                         textView(R.string.forward) {
@@ -263,7 +269,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // away forward
                         textView {
-                            id = R.id.match_away_forward
+                            id = R.id.detail_match_away_forward
                         }.lparams(width = dip(0), weight = 1F)
 
                     }.lparams(width = matchParent) {
@@ -275,7 +281,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // home subs
                         textView {
-                            id = R.id.match_home_subs
+                            id = R.id.detail_match_home_subs
                         }.lparams(width = dip(0), weight = 1F)
 
                         textView(R.string.substitutes) {
@@ -285,7 +291,7 @@ class DetailMatchUI : AnkoComponent<DetailMatchActivity> {
 
                         // away subs
                         textView {
-                            id = R.id.match_away_subs
+                            id = R.id.detail_match_away_subs
                         }.lparams(width = dip(0), weight = 1F)
 
                     }.lparams(width = matchParent) {
