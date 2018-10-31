@@ -72,7 +72,7 @@ class ListFavoriteFragment : Fragment(), AnkoComponent<Context> {
         else
         {
             favoriteTeamsAdapter = FavoriteTeamsAdapter(favoritesTeams) {
-                ctx.startActivity<DetailTeamActivity>("id" to "${it.teamId}", "desc" to "${it.teamDescription}")
+                ctx.startActivity<DetailTeamActivity>("id" to "${it.teamId}", "desc" to "${it.teamDescription}", "name" to "${it.teamName}")
             }
 
             listFav.adapter = favoriteTeamsAdapter

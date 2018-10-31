@@ -31,5 +31,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="match">Match</string>
     <string name="team">Team</string>
+    <string name="weight">Weight (KG)</string>
+    <string name="height">Height (m)</string>
 
 </resources>

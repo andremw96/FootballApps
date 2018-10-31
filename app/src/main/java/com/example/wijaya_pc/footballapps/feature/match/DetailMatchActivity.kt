@@ -33,12 +33,6 @@ import org.jetbrains.anko.setContentView
 
 
 class DetailMatchActivity : AppCompatActivity(), DetailMatchView {
-
-    companion object {
-        const val dataParcel = "data_parcel"
-    }
-
-
     private lateinit var detailView: ScrollView
     private lateinit var progressBar: ProgressBar
 
@@ -102,10 +96,12 @@ class DetailMatchActivity : AppCompatActivity(), DetailMatchView {
                     detailPresenter.removeFromFavorite(ctx, matches.matchId)
                     snackbar(detailView, "Removed from FavoriteMatches").show()
                 } else {
+                    val matchDateTime = dateTimeToSimpleString(toGMTFormat(dateToSimpleString(matches.matchDate), matches.matchTime))
+
                     detailPresenter.addToFavorite(
                         ctx, matches.matchId,
-                        dateToSimpleString(matches.matchDate),
-                        timeToSimpleString(timeToGMT(matches.matchTime)),
+                        matchDateTime!!.substring(0, 16),
+                        matchDateTime!!.substring(17, 22),
                         matches.idHomeTeam,
                         matches.idAwayTeam,
                         matches.homeTeam,
@@ -156,11 +152,13 @@ class DetailMatchActivity : AppCompatActivity(), DetailMatchView {
             data.awaySubtitutes
         )
 
+        val matchDateTime = dateTimeToSimpleString(toGMTFormat(dateToSimpleString(data.matchDate), data.matchTime))
+
         val matchDate: TextView = find(detail_match_date)
-        matchDate.text = dateToSimpleString(data.matchDate)
+        matchDate.text = matchDateTime!!.substring(0, 16)
 
         val matchTime: TextView = find(detail_match_time)
-        matchTime.text = timeToSimpleString(timeToGMT(data.matchTime))
+        matchTime.text = matchDateTime!!.substring(17, 22)
 
         val hometeam: TextView = find(detail_match_home_team)
         val awayteam: TextView = find(detail_match_away_team)

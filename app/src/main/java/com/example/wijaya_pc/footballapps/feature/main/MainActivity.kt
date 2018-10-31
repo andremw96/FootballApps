@@ -35,6 +35,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun loadMatchFragment() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(
+                R.id.main_container,
+                MatchFragment(), MatchFragment::class.java.simpleName)
+            .commit()
+    }
+
     private fun loadTeamsFragment() {
         supportFragmentManager
             .beginTransaction()
@@ -50,15 +59,6 @@ class MainActivity : AppCompatActivity() {
                 .replace(
                     R.id.main_container,
                     FavoriteFragment(), FavoriteFragment::class.java.simpleName)
-                .commit()
-    }
-
-    private fun loadMatchFragment() {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(
-                    R.id.main_container,
-                    MatchFragment(), MatchFragment::class.java.simpleName)
                 .commit()
     }
 

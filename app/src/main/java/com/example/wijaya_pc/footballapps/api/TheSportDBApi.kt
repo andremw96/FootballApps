@@ -31,4 +31,12 @@ object TheSportDBApi {
     fun getTeamDetail(teamId: String?): String {
         return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/lookupteam.php?id=" + teamId
     }
+
+    fun getPlayerTeam(teamName: String?): String {
+        return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/searchplayers.php?t=" + teamName
+    }
+
+    fun getPlayerDetails(playerId: String?) : String {
+        return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/lookupplayer.php?id=" + playerId
+    }
 }

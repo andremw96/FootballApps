@@ -3,14 +3,13 @@ package com.example.wijaya_pc.footballapps.adapter
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.wijaya_pc.footballapps.*
 import com.example.wijaya_pc.footballapps.R.id.*
-import com.example.wijaya_pc.footballapps.dateToSimpleString
 import com.example.wijaya_pc.footballapps.model.Match
-import com.example.wijaya_pc.footballapps.timeToGMT
-import com.example.wijaya_pc.footballapps.timeToSimpleString
 import com.example.wijaya_pc.footballapps.ui.MatchUI
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
@@ -44,9 +43,13 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val matchAwayTeam: TextView = view.find(match_away_team)
 
     fun bindItem(matches: Match, listener: (Match) -> Unit) {
+        val matchDateTime = dateTimeToSimpleString(toGMTFormat(dateToSimpleString(matches.matchDate), matches.matchTime))
 
-        matchDate.text = dateToSimpleString(matches.matchDate)
-        matchTime.text = timeToSimpleString(timeToGMT(matches.matchTime))
+        //matchDate.text = dateToSimpleString(matches.matchDate)
+        //matchTime.text = timeToSimpleString(timeToGMT(matches.matchTime))
+
+        matchDate.text = matchDateTime!!.substring(0, 16)
+        matchTime.text = matchDateTime!!.substring(17, 22)
 
         matchHomeTeam.text = matches.homeTeam
         matchHomeScore.text = matches.homeScore

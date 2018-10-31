@@ -68,6 +68,16 @@
     <item name="detail_team_UI" type="id"/>
     <item name="tabs_detail_team" type="id"/>
     <item name="viewpager_detail_team" type="id"/>
+    <item name="player_photo" type="id"/>
+    <item name="player_name" type="id"/>
+    <item name="player_position" type="id"/>
+    <item name="player_detail_photo" type="id"/>
+    <item name="player_detail_weight" type="id"/>
+    <item name="player_detail_height" type="id"/>
+    <item name="player_detail_position" type="id"/>
+    <item name="player_detail_description" type="id"/>
+    <item name="player_detail_sv" type="id"/>
+    <item name="player_detail_progress" type="id"/>
 
 
 </resources>
