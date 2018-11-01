@@ -7,9 +7,8 @@ import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.SearchView
+import android.view.*
 import android.widget.*
 import com.example.wijaya_pc.footballapps.R.array.league
 import com.example.wijaya_pc.footballapps.R.color.colorAccent
@@ -26,6 +25,7 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
+import org.jetbrains.anko.support.v4.toast
 
 class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamView {
 
@@ -39,6 +39,8 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamView {
     private lateinit var teamAdapter: TeamAdapter
 
     private lateinit var leagueName : String
+
+    private lateinit var searchView : SearchView
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -107,6 +109,30 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamView {
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(com.example.wijaya_pc.footballapps.R.menu.search_menu, menu)
+
+        val searchMenu = menu.findItem(com.example.wijaya_pc.footballapps.R.id.action_search)
+        searchView = searchMenu.actionView as SearchView
+        searchView.queryHint = "Search"
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                toast("$query")
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
     }
 
     override fun showLoading() {

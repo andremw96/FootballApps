@@ -11,22 +11,21 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-
-        <activity android:name="com.example.wijaya_pc.footballapps.feature.main.MainActivity">
+        <activity android:name=".feature.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <activity android:name="com.example.wijaya_pc.footballapps.feature.match.DetailMatchActivity">
+        <activity android:name=".feature.match.DetailMatchActivity">
         </activity>
-
-        <activity android:name="com.example.wijaya_pc.footballapps.feature.team.DetailTeamActivity">
+        <activity android:name=".feature.team.DetailTeamActivity">
         </activity>
-
-        <activity android:name="com.example.wijaya_pc.footballapps.feature.player.DetailPlayerActivity">
+        <activity android:name=".feature.player.DetailPlayerActivity">
+        </activity>
+        <activity android:name=".feature.match.SearchMatchActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

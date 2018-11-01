@@ -4,22 +4,35 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.SearchView
+import android.support.v7.widget.Toolbar
+import android.view.*
+import android.widget.Button
 import com.example.wijaya_pc.footballapps.R
+import com.example.wijaya_pc.footballapps.R.id.match_button_search
 import com.example.wijaya_pc.footballapps.adapter.pager.MatchPagerAdapter
 import org.jetbrains.anko.find
+import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.support.v4.ctx
+import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.toast
 
 class MatchFragment : Fragment() {
 
     private lateinit var viewPager : ViewPager
     private lateinit var tabs : TabLayout
 
+    private lateinit var searchButton : Button
+
     private lateinit var mMatchPagerAdapter: MatchPagerAdapter
+
+    private var menuItem: Menu? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView =  inflater.inflate(R.layout.fragment_match, container, false)
+
+        setHasOptionsMenu(true)
 
         viewPager = rootView.find(R.id.viewPagerContainer) as ViewPager
         tabs = rootView.find(R.id.tabs) as TabLayout
@@ -31,5 +44,25 @@ class MatchFragment : Fragment() {
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
 
         return rootView
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.match_fragment_menu, menu)
+        menuItem = menu
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            match_button_search -> {
+                ctx.startActivity<SearchMatchActivity>()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
+
     }
 }

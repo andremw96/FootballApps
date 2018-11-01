@@ -33,5 +33,6 @@
     <string name="team">Team</string>
     <string name="weight">Weight (KG)</string>
     <string name="height">Height (m)</string>
+    <string name="search">Search</string>
 
 </resources>
