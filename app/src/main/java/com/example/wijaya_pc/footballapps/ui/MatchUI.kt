@@ -16,9 +16,12 @@ class MatchUI : AnkoComponent<ViewGroup> {
             orientation = LinearLayout.VERTICAL
 
             cardView {
+                radius = dip(4).toFloat()
 
                 linearLayout {
-                    lparams(width = matchParent)
+                    lparams(width = matchParent) {
+                        bottomMargin = dip(5)
+                    }
                     orientation = LinearLayout.VERTICAL
 
                     textView {
@@ -26,30 +29,32 @@ class MatchUI : AnkoComponent<ViewGroup> {
                         textSize = 12f
                         textColor = Color.GREEN
                         gravity = Gravity.CENTER_HORIZONTAL
-                    }
+                    }.lparams(width = matchParent)
 
                     textView {
                         id = R.id.match_time
                         textSize = 12f
                         textColor = Color.RED
                         gravity = Gravity.CENTER_HORIZONTAL
-                    }
+                    }.lparams(width = matchParent)
                 }
 
-
                 linearLayout {
-                    lparams(width = matchParent)
+                    lparams(width = matchParent) {
+                        topMargin = dip(10)
+                    }
 
                     padding = dip(16)
                     orientation = LinearLayout.HORIZONTAL
-                    gravity = Gravity.CENTER
 
                     // home team
                     textView {
                         id = R.id.match_home_team
                         textSize = 16f
                         gravity = Gravity.START
-                    }.lparams(width = dip(0), weight = 1F)
+                    }.lparams(width = dip(0), weight = 1F) {
+                        gravity = Gravity.CENTER_VERTICAL
+                    }
 
                     // home team score
                     textView {
@@ -84,7 +89,9 @@ class MatchUI : AnkoComponent<ViewGroup> {
                         id = R.id.match_away_team
                         textSize = 16f
                         gravity = Gravity.END
-                    }.lparams(width = dip(0), weight = 1F)
+                    }.lparams(width = dip(0), weight = 1F) {
+                        gravity = Gravity.CENTER_VERTICAL
+                    }
                 }
             }.lparams(width = matchParent) {
                 topMargin = dip(8)

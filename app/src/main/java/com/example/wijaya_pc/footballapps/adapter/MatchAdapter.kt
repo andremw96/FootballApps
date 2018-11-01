@@ -43,7 +43,9 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val matchAwayTeam: TextView = view.find(match_away_team)
 
     fun bindItem(matches: Match, listener: (Match) -> Unit) {
-        val matchDateTime = dateTimeToSimpleString(toGMTFormat(dateToSimpleString(matches.matchDate), matches.matchTime))
+        val match_time = if (matches.matchTime == null) "00:00:00" else matches.matchTime
+
+        val matchDateTime = dateTimeToSimpleString(toGMTFormat(dateToSimpleString(matches.matchDate), match_time))
 
         //matchDate.text = dateToSimpleString(matches.matchDate)
         //matchTime.text = timeToSimpleString(timeToGMT(matches.matchTime))

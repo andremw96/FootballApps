@@ -33,6 +33,7 @@ class SearchMatchActivity : AppCompatActivity(), SearchMatchView {
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView : SearchView
     private lateinit var progressBar : ProgressBar
+    private lateinit var swipeRefresh : SwipeRefreshLayout
 
     private var matches: MutableList<Match> = mutableListOf()
 
@@ -47,6 +48,7 @@ class SearchMatchActivity : AppCompatActivity(), SearchMatchView {
         toolbar = find(R.id.toolbar_search)
         recyclerView = find(R.id.rv_search)
         progressBar = find(R.id.progress_bar_search)
+        swipeRefresh = find(R.id.swipe_refresh_search)
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Search Match"
@@ -111,6 +113,7 @@ class SearchMatchActivity : AppCompatActivity(), SearchMatchView {
     }
 
     override fun showSearchMatchList(data: List<Match>) {
+        swipeRefresh.isRefreshing = false
         matches.clear()
         matches.addAll(data)
         matchAdapter.notifyDataSetChanged()
