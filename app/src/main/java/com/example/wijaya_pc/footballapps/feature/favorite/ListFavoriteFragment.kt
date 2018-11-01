@@ -1,8 +1,6 @@
-package com.example.wijaya_pc.footballapps.feature.favoritematch
+package com.example.wijaya_pc.footballapps.feature.favorite
 
-import android.app.Activity.RESULT_OK
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout

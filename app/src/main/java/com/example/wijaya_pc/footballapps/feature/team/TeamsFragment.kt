@@ -7,13 +7,14 @@ import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SearchView
 import android.view.*
 import android.widget.*
 import com.example.wijaya_pc.footballapps.R.array.league
 import com.example.wijaya_pc.footballapps.R.color.colorAccent
+import com.example.wijaya_pc.footballapps.R.id.button_search
 import com.example.wijaya_pc.footballapps.adapter.TeamAdapter
 import com.example.wijaya_pc.footballapps.api.ApiRepository
+import com.example.wijaya_pc.footballapps.feature.match.SearchMatchActivity
 import com.example.wijaya_pc.footballapps.invisible
 import com.example.wijaya_pc.footballapps.model.Team
 import com.example.wijaya_pc.footballapps.presenter.TeamPresenter
@@ -25,7 +26,6 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
-import org.jetbrains.anko.support.v4.toast
 
 class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamView {
 
@@ -40,7 +40,7 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamView {
 
     private lateinit var leagueName : String
 
-    private lateinit var searchView : SearchView
+    private var menuItem: Menu? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -75,6 +75,8 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
+
         return createView(AnkoContext.create(ctx))
     }
 
@@ -114,25 +116,18 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamView {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
 
-        inflater.inflate(com.example.wijaya_pc.footballapps.R.menu.search_menu, menu)
+        inflater.inflate(com.example.wijaya_pc.footballapps.R.menu.search_toolbar_menu, menu)
+        menuItem = menu
+    }
 
-        val searchMenu = menu.findItem(com.example.wijaya_pc.footballapps.R.id.action_search)
-        searchView = searchMenu.actionView as SearchView
-        searchView.queryHint = "Search"
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                toast("$query")
-
-                return false
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            button_search -> {
+                ctx.startActivity<SearchTeamActivity>()
+                true
             }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-
-        })
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun showLoading() {

@@ -1,4 +1,4 @@
-package com.example.wijaya_pc.footballapps.feature.favoritematch
+package com.example.wijaya_pc.footballapps.feature.favorite
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout

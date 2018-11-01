@@ -171,7 +171,5 @@ class ListMatchFragment : Fragment(), AnkoComponent<Context>, MatchView {
     override fun showLeagueList(data: List<League>) {
         /*leagues.clear()
         leagues.addAll(data)*/
-
-
     }
 }

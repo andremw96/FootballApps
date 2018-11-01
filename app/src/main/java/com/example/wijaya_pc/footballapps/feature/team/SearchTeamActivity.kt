@@ -1,77 +1,78 @@
-package com.example.wijaya_pc.footballapps.feature.match
+package com.example.wijaya_pc.footballapps.feature.team
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ProgressBar
+import android.widget.Spinner
 import com.example.wijaya_pc.footballapps.R
-import com.example.wijaya_pc.footballapps.R.menu.search_menu
-import com.example.wijaya_pc.footballapps.adapter.MatchAdapter
+import com.example.wijaya_pc.footballapps.R.layout.activity_search_team
+import com.example.wijaya_pc.footballapps.adapter.TeamAdapter
 import com.example.wijaya_pc.footballapps.api.ApiRepository
 import com.example.wijaya_pc.footballapps.invisible
-import com.example.wijaya_pc.footballapps.model.Match
-import com.example.wijaya_pc.footballapps.presenter.MatchPresenter
+import com.example.wijaya_pc.footballapps.model.Team
 import com.example.wijaya_pc.footballapps.presenter.SearchMatchPresenter
-import com.example.wijaya_pc.footballapps.view.SearchMatchView
+import com.example.wijaya_pc.footballapps.presenter.SearchTeamPresenter
+import com.example.wijaya_pc.footballapps.presenter.TeamPresenter
+import com.example.wijaya_pc.footballapps.view.SearchTeamView
+import com.example.wijaya_pc.footballapps.view.TeamView
 import com.example.wijaya_pc.footballapps.visible
 import com.google.gson.Gson
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.toast
 
-class SearchMatchActivity : AppCompatActivity(), SearchMatchView {
+class SearchTeamActivity : AppCompatActivity(), SearchTeamView {
+
     private lateinit var toolbar: Toolbar
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var searchView : SearchView
     private lateinit var progressBar : ProgressBar
     private lateinit var swipeRefresh : SwipeRefreshLayout
 
-    private var matches: MutableList<Match> = mutableListOf()
+    private var teams: MutableList<Team>  = mutableListOf()
+    private lateinit var teamPresenter: SearchTeamPresenter
+    private lateinit var teamAdapter: TeamAdapter
 
-    private lateinit var matchAdapter: MatchAdapter
-
-    private lateinit var presenter: SearchMatchPresenter
+    private lateinit var searchView : SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search_match)
+        setContentView(activity_search_team)
 
-        toolbar = find(R.id.toolbar_search)
-        recyclerView = find(R.id.rv_search)
-        progressBar = find(R.id.progress_bar_search)
-        swipeRefresh = find(R.id.swipe_refresh_search)
+        toolbar = find(R.id.toolbar_search_team)
+        recyclerView = find(R.id.rv_search_team)
+        progressBar = find(R.id.progress_bar_search_team)
+        swipeRefresh = find(R.id.swipe_refresh_search_team)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.title = "Search Match"
+        supportActionBar?.title = "Search Team"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val request = ApiRepository()
         val gson = Gson()
-        presenter = SearchMatchPresenter(this, request, gson)
+        teamPresenter = SearchTeamPresenter(this, request, gson)
 
         recyclerView.layoutManager = LinearLayoutManager(ctx)
-        matchAdapter = MatchAdapter(matches) {
-            ctx.startActivity<DetailMatchActivity>(
-                "id" to "${it.matchId}",
-                "homeTeamId" to "${it.idHomeTeam}",
-                "awayTeamId" to "${it.idAwayTeam}"
-            )
+        teamAdapter = TeamAdapter(teams) {
+            ctx.startActivity<DetailTeamActivity>("id" to "${it.teamId}", "desc" to "${it.teamDescription}", "name" to "${it.teamName}")
         }
-        recyclerView.adapter = matchAdapter
-
+        recyclerView.adapter = teamAdapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(search_menu, menu)
+        menuInflater.inflate(R.menu.search_menu, menu)
 
         val searchMenu = menu.findItem(R.id.action_search)
         searchMenu.expandActionView()
@@ -80,13 +81,13 @@ class SearchMatchActivity : AppCompatActivity(), SearchMatchView {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                presenter.getSearchMatch(query)
+                teamPresenter.getSearchTeam(query)
 
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                presenter.getSearchMatch(newText)
+                teamPresenter.getSearchTeam(newText)
 
                 return true
             }
@@ -106,6 +107,7 @@ class SearchMatchActivity : AppCompatActivity(), SearchMatchView {
         }
     }
 
+
     override fun showLoading() {
         progressBar.visible()
     }
@@ -114,11 +116,10 @@ class SearchMatchActivity : AppCompatActivity(), SearchMatchView {
         progressBar.invisible()
     }
 
-    override fun showSearchMatchList(data: List<Match>) {
+    override fun showSearchTeamList(data: List<Team>) {
         swipeRefresh.isRefreshing = false
-        matches.clear()
-        matches.addAll(data)
-        matchAdapter.notifyDataSetChanged()
+        teams.clear()
+        teams.addAll(data)
+        teamAdapter.notifyDataSetChanged()
     }
-
 }

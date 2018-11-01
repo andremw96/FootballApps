@@ -27,6 +27,9 @@
         <activity android:name=".feature.match.SearchMatchActivity"
                   android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name=".feature.team.SearchTeamActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
