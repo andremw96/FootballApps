@@ -5,8 +5,10 @@ import android.support.annotation.RequiresApi
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import com.example.wijaya_pc.footballapps.R.id.*
+import com.example.wijaya_pc.footballapps.invisible
 import com.example.wijaya_pc.footballapps.model.FavoriteMatches
 import com.example.wijaya_pc.footballapps.ui.MatchUI
 import org.jetbrains.anko.AnkoContext
@@ -41,8 +43,15 @@ class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val awayTeamScore: TextView = view.find(match_away_score)
     private val awayTeamName: TextView = view.find(match_away_team)
 
+    private val btnToCalendar : ImageButton = view.find(btn_to_calendar)
+
 
     fun bindItem(favorite: FavoriteMatches, listener: (FavoriteMatches) -> Unit) {
+
+        if(!(favorite.homeTeamScore.isNullOrBlank()) && !(favorite.awayTeamScore.isNullOrBlank())) {
+            btnToCalendar.invisible()
+        }
+
         matchDate.text = favorite.matchDate
         matchTime.text = favorite.matchTime
         homeTeamName.text = favorite.homeTeamName

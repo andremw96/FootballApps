@@ -78,6 +78,7 @@
     <item name="player_detail_description" type="id"/>
     <item name="player_detail_sv" type="id"/>
     <item name="player_detail_progress" type="id"/>
+    <item name="btn_to_calendar" type="id"/>
 
 
 </resources>

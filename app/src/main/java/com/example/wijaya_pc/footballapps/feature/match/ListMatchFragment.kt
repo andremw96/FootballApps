@@ -1,7 +1,9 @@
 package com.example.wijaya_pc.footballapps.feature.match
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -23,9 +25,8 @@ import com.example.wijaya_pc.footballapps.visible
 import com.google.gson.Gson
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
-import org.jetbrains.anko.support.v4.ctx
-import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.support.v4.swipeRefreshLayout
+import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.support.v4.*
 
 
 class ListMatchFragment : Fragment(), AnkoComponent<Context>, MatchView {
@@ -109,7 +110,6 @@ class ListMatchFragment : Fragment(), AnkoComponent<Context>, MatchView {
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

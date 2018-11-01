@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.wijaya_pc.footballapps.R
+import com.example.wijaya_pc.footballapps.invisible
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
 
@@ -18,11 +19,19 @@ class MatchUI : AnkoComponent<ViewGroup> {
             cardView {
                 radius = dip(4).toFloat()
 
+                imageButton {
+                    id = R.id.btn_to_calendar
+                    setImageResource(R.drawable.ic_calendar_clock)
+                }.lparams(width = dip(25), height = dip(25)) {
+                    gravity = Gravity.END
+                }
+
                 linearLayout {
                     lparams(width = matchParent) {
                         bottomMargin = dip(5)
                     }
                     orientation = LinearLayout.VERTICAL
+
 
                     textView {
                         id = R.id.match_date
@@ -30,6 +39,7 @@ class MatchUI : AnkoComponent<ViewGroup> {
                         textColor = Color.GREEN
                         gravity = Gravity.CENTER_HORIZONTAL
                     }.lparams(width = matchParent)
+
 
                     textView {
                         id = R.id.match_time
