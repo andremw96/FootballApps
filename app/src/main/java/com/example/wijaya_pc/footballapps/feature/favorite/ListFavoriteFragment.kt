@@ -23,7 +23,9 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.recyclerview.v7.recyclerView
-import org.jetbrains.anko.support.v4.*
+import org.jetbrains.anko.support.v4.ctx
+import org.jetbrains.anko.support.v4.onRefresh
+import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class ListFavoriteFragment : Fragment(), AnkoComponent<Context> {
 
@@ -66,11 +68,13 @@ class ListFavoriteFragment : Fragment(), AnkoComponent<Context> {
                 favoritesMatches.clear()
                 showFavoriteMatch()
             }
-        }
-        else
-        {
+        } else {
             favoriteTeamsAdapter = FavoriteTeamsAdapter(favoritesTeams) {
-                ctx.startActivity<DetailTeamActivity>("id" to "${it.teamId}", "desc" to "${it.teamDescription}", "name" to "${it.teamName}")
+                ctx.startActivity<DetailTeamActivity>(
+                    "id" to "${it.teamId}",
+                    "desc" to "${it.teamDescription}",
+                    "name" to "${it.teamName}"
+                )
             }
 
             listFav.adapter = favoriteTeamsAdapter
@@ -104,6 +108,12 @@ class ListFavoriteFragment : Fragment(), AnkoComponent<Context> {
 
                     listFav = recyclerView {
                         id = R.id.listFav
+                        if (arguments?.getInt(ListFavoriteFragment.ARG_SECTION_NUMBER) == 0) {
+                            tag = "fav_match"
+                        }
+                        else {
+                            tag = "fav_team"
+                        }
                         lparams(width = matchParent, height = wrapContent)
                         layoutManager = LinearLayoutManager(ctx)
                     }

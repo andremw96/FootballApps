@@ -5,35 +5,14 @@
     <item name="match_home_score" type="id"/>
     <item name="match_away_score" type="id"/>
     <item name="match_away_team" type="id"/>
-    <item name="main_tabs_pager" type="id"/>
-    <item name="tab_last_match" type="id"/>
     <item name="tab_next_match" type="id"/>
-    <item name="home_logo" type="id"/>
-    <item name="away_logo" type="id"/>
-    <item name="match_home_goals" type="id"/>
-    <item name="match_away_goals" type="id"/>
-    <item name="match_home_shots" type="id"/>
-    <item name="match_away_shots" type="id"/>
-    <item name="match_home_formation" type="id"/>
-    <item name="match_away_formation" type="id"/>
-    <item name="match_home_goalkeeper" type="id"/>
-    <item name="match_away_goalkeeper" type="id"/>
-    <item name="match_home_defense" type="id"/>
-    <item name="match_away_defense" type="id"/>
-    <item name="match_home_midfield" type="id"/>
-    <item name="match_away_midfield" type="id"/>
-    <item name="match_home_forward" type="id"/>
-    <item name="match_away_forward" type="id"/>
-    <item name="match_home_subs" type="id"/>
-    <item name="match_away_subs" type="id"/>
     <item name="progress_Bar" type="id"/>
     <item name="detail_view" type="id"/>
     <item name="listMatch" type="id"/>
+    <item name="listTeam" type="id"/>
     <item name="listFav" type="id"/>
-    <item name="tab_match" type="id"/>
     <item name="team_badge" type="id"/>
     <item name="team_name" type="id"/>
-    <item name="swipeRefreshDetailTeam" type="id"/>
     <item name="progressBarDetailTeam" type="id"/>
     <item name="team_badgeDetailTeam" type="id"/>
     <item name="team_nameDetailTeam" type="id"/>
@@ -79,6 +58,9 @@
     <item name="player_detail_sv" type="id"/>
     <item name="player_detail_progress" type="id"/>
     <item name="btn_to_calendar" type="id"/>
+    <item name="spinner_match" type="id"/>
+    <item name="spinner_teams" type="id"/>
+    <item name="listPlayer" type="id"/>
 
 
 </resources>

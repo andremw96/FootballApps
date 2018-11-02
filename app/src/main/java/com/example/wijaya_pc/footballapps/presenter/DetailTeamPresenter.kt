@@ -16,20 +16,21 @@ import org.jetbrains.anko.coroutines.experimental.bg
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 
-class DetailTeamPresenter(private val view: DetailTeamView,
-                          private val apiRepository: ApiRepository,
-                          private val gson: Gson,
-                          private val context: CoroutineContextProvider = CoroutineContextProvider()
-)
-{
+class DetailTeamPresenter(
+    private val view: DetailTeamView,
+    private val apiRepository: ApiRepository,
+    private val gson: Gson,
+    private val context: CoroutineContextProvider = CoroutineContextProvider()
+) {
 
     fun getTeamDetail(teamId: String) {
         view.showLoading()
 
         async(context.main) {
             val data = bg {
-                gson.fromJson(apiRepository
-                    .doRequest(TheSportDBApi.getTeamDetail(teamId)),
+                gson.fromJson(
+                    apiRepository
+                        .doRequest(TheSportDBApi.getTeamDetail(teamId)),
                     TeamResponse::class.java
                 )
             }
@@ -43,23 +44,33 @@ class DetailTeamPresenter(private val view: DetailTeamView,
             context.databaseTeam.use {
                 delete(FavoriteTeams.TABLE_FAVORITE_TEAMS, "(TEAM_ID = {id})", "id" to "$teamId")
             }
-        } catch (e: SQLiteConstraintException){
+        } catch (e: SQLiteConstraintException) {
             Log.d("failed delete fav", e.localizedMessage)
         }
     }
 
-    fun addToFavoriteTeam(context: Context, teamId: String?, teamName: String?, teamBadge: String?, teamFormedYear: String?, teamStadium: String?, teamDescription: String?) {
+    fun addToFavoriteTeam(
+        context: Context,
+        teamId: String?,
+        teamName: String?,
+        teamBadge: String?,
+        teamFormedYear: String?,
+        teamStadium: String?,
+        teamDescription: String?
+    ) {
         try {
             context.databaseTeam.use {
-                insert(FavoriteTeams.TABLE_FAVORITE_TEAMS,
+                insert(
+                    FavoriteTeams.TABLE_FAVORITE_TEAMS,
                     FavoriteTeams.TEAM_ID to teamId,
                     FavoriteTeams.TEAM_NAME to teamName,
                     FavoriteTeams.TEAM_BADGE to teamBadge,
                     FavoriteTeams.TEAM_FORMED_YEAR to teamFormedYear,
                     FavoriteTeams.TEAM_STADIUM to teamStadium,
-                    FavoriteTeams.TEAM_DESCRIPTION to teamDescription)
+                    FavoriteTeams.TEAM_DESCRIPTION to teamDescription
+                )
             }
-        } catch (e: SQLiteConstraintException){
+        } catch (e: SQLiteConstraintException) {
             Log.d("failed add fav", e.localizedMessage)
         }
     }

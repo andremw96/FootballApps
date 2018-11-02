@@ -24,7 +24,7 @@ object TheSportDBApi {
         return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/all_leagues.php?s=Soccer"
     }
 
-    fun getAllTeams(leagueName: String?) : String {
+    fun getTeamList(leagueName: String?) : String {
         return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/search_all_teams.php?l=" + leagueName
     }
 

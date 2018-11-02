@@ -14,7 +14,6 @@ import com.example.wijaya_pc.footballapps.ui.MatchUI
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.w3c.dom.Text
 
 class FavoriteMatchesAdapter(
     private val favorite: MutableList<FavoriteMatches>,
@@ -43,12 +42,12 @@ class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val awayTeamScore: TextView = view.find(match_away_score)
     private val awayTeamName: TextView = view.find(match_away_team)
 
-    private val btnToCalendar : ImageButton = view.find(btn_to_calendar)
+    private val btnToCalendar: ImageButton = view.find(btn_to_calendar)
 
 
     fun bindItem(favorite: FavoriteMatches, listener: (FavoriteMatches) -> Unit) {
 
-        if(!(favorite.homeTeamScore.isNullOrBlank()) && !(favorite.awayTeamScore.isNullOrBlank())) {
+        if (!(favorite.homeTeamScore.isNullOrBlank()) && !(favorite.awayTeamScore.isNullOrBlank())) {
             btnToCalendar.invisible()
         }
 

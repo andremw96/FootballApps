@@ -14,7 +14,10 @@ import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
-class FavoriteTeamsAdapter(private val favoriteTeams: MutableList<FavoriteTeams>, private val listener: (FavoriteTeams) -> Unit) : RecyclerView.Adapter<FavoriteTeamsViewHolder>() {
+class FavoriteTeamsAdapter(
+    private val favoriteTeams: MutableList<FavoriteTeams>,
+    private val listener: (FavoriteTeams) -> Unit
+) : RecyclerView.Adapter<FavoriteTeamsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteTeamsViewHolder {
         return FavoriteTeamsViewHolder(TeamUI().createView(AnkoContext.create(parent.context, parent)))
@@ -28,7 +31,7 @@ class FavoriteTeamsAdapter(private val favoriteTeams: MutableList<FavoriteTeams>
 
 }
 
-class FavoriteTeamsViewHolder(view: View): RecyclerView.ViewHolder(view) {
+class FavoriteTeamsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val teamBadge: ImageView = view.find(team_badge)
     private val teamName: TextView = view.find(team_name)

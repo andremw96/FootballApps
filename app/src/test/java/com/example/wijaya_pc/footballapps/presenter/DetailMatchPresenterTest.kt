@@ -17,7 +17,8 @@ import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import java.text.SimpleDateFormat
 
-class DetailPresenterTest {
+
+class DetailMatchPresenterTest {
 
     @Mock
     private
@@ -39,12 +40,14 @@ class DetailPresenterTest {
         presenter = DetailMatchPresenter(view, apiRepository, gson, TestContextProvider())
     }
 
+
     @Test
     fun testGetMatchDetail() {
         val matches: List<Match> = listOf(
             Match(
                 "576554",
                 SimpleDateFormat("MM/dd/yyyy").parse("2018/10/20"),
+                SimpleDateFormat("HH:mm").parse("11:30:00+00:00").toString(),
                 "133610",
                 "133612",
                 "Chelsea",

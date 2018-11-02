@@ -14,15 +14,15 @@ import org.jetbrains.anko.support.v4.ctx
 
 class MatchFragment : Fragment() {
 
-    private lateinit var viewPager : ViewPager
-    private lateinit var tabs : TabLayout
+    private lateinit var viewPager: ViewPager
+    private lateinit var tabs: TabLayout
 
     private lateinit var mMatchPagerAdapter: MatchPagerAdapter
 
     private var menuItem: Menu? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView =  inflater.inflate(R.layout.fragment_match, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_match, container, false)
 
         setHasOptionsMenu(true)
 
@@ -47,7 +47,7 @@ class MatchFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             button_search -> {
                 ctx.startActivity<SearchMatchActivity>()
                 true

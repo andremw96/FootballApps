@@ -1,10 +1,7 @@
 package com.example.wijaya_pc.footballapps.feature.player
 
-import android.media.Image
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -23,7 +20,6 @@ import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
-import org.jetbrains.anko.toast
 
 class DetailPlayerActivity : AppCompatActivity(), DetailPlayerView {
 
@@ -77,19 +73,19 @@ class DetailPlayerActivity : AppCompatActivity(), DetailPlayerView {
     }
 
     override fun showPlayerDetail(data: Player) {
-        val playerThumb : ImageView = find(player_detail_photo)
+        val playerThumb: ImageView = find(player_detail_photo)
         Picasso.get().load(data.playerThumb).placeholder(R.drawable.default_player).into(playerThumb)
 
-        val playerWeight : TextView = find(player_detail_weight)
+        val playerWeight: TextView = find(player_detail_weight)
         playerWeight.text = data.playerWeight
 
-        val playerHeight : TextView = find(player_detail_height)
+        val playerHeight: TextView = find(player_detail_height)
         playerHeight.text = data.playerHeight
 
-        val playerPosition : TextView = find(player_detail_position)
+        val playerPosition: TextView = find(player_detail_position)
         playerPosition.text = data.playerPosition
 
-        val playerDesc : TextView = find(player_detail_description)
+        val playerDesc: TextView = find(player_detail_description)
         playerDesc.text = data.playerDescription
     }
 

@@ -3,7 +3,6 @@ package com.example.wijaya_pc.footballapps.presenter
 import com.example.wijaya_pc.footballapps.api.ApiRepository
 import com.example.wijaya_pc.footballapps.api.TheSportDBApi
 import com.example.wijaya_pc.footballapps.coroutine.CoroutineContextProvider
-import com.example.wijaya_pc.footballapps.model.MatchResponse
 import com.example.wijaya_pc.footballapps.model.SearchMatchResponse
 import com.example.wijaya_pc.footballapps.view.SearchMatchView
 import com.google.gson.Gson

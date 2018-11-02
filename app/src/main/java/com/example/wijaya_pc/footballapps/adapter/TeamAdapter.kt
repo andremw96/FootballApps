@@ -14,7 +14,8 @@ import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
-class TeamAdapter(private val teams: List<Team>, private val listener: (Team) -> Unit) : RecyclerView.Adapter<TeamViewHolder>(){
+class TeamAdapter(private val teams: List<Team>, private val listener: (Team) -> Unit) :
+    RecyclerView.Adapter<TeamViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
         return TeamViewHolder(TeamUI().createView(AnkoContext.create(parent.context, parent)))
@@ -29,8 +30,8 @@ class TeamAdapter(private val teams: List<Team>, private val listener: (Team) ->
 
 class TeamViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    private val teamBadge : ImageView = view.find(team_badge)
-    private val teamName : TextView = view.find(team_name)
+    private val teamBadge: ImageView = view.find(team_badge)
+    private val teamName: TextView = view.find(team_name)
 
     fun bindItem(teams: Team, listener: (Team) -> Unit) {
         Picasso.get().load(teams.teamBadge).into(teamBadge)

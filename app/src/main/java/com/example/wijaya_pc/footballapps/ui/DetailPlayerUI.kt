@@ -6,10 +6,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.example.wijaya_pc.footballapps.R
-import com.example.wijaya_pc.footballapps.feature.match.DetailMatchActivity
 import com.example.wijaya_pc.footballapps.feature.player.DetailPlayerActivity
 import org.jetbrains.anko.*
-import org.jetbrains.anko.design.themedAppBarLayout
 
 class DetailPlayerUI : AnkoComponent<DetailPlayerActivity> {
     override fun createView(ui: AnkoContext<DetailPlayerActivity>): View = with(ui) {

@@ -14,7 +14,6 @@ import android.widget.ProgressBar
 import com.example.wijaya_pc.footballapps.R
 import com.example.wijaya_pc.footballapps.adapter.PlayerAdapter
 import com.example.wijaya_pc.footballapps.api.ApiRepository
-import com.example.wijaya_pc.footballapps.feature.team.OverviewTeamFragment
 import com.example.wijaya_pc.footballapps.invisible
 import com.example.wijaya_pc.footballapps.model.Player
 import com.example.wijaya_pc.footballapps.presenter.PlayerPresenter
@@ -26,7 +25,6 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
-import org.jetbrains.anko.support.v4.toast
 
 class PlayersFragment : Fragment(), AnkoComponent<Context>, PlayerView {
 
@@ -42,15 +40,15 @@ class PlayersFragment : Fragment(), AnkoComponent<Context>, PlayerView {
         }
     }
 
-    private lateinit var listPlayer : RecyclerView
-    private lateinit var progressBar : ProgressBar
-    private lateinit var swipeRefresh : SwipeRefreshLayout
+    private lateinit var listPlayer: RecyclerView
+    private lateinit var progressBar: ProgressBar
+    private lateinit var swipeRefresh: SwipeRefreshLayout
 
-    private var players: MutableList<Player>  = mutableListOf()
+    private var players: MutableList<Player> = mutableListOf()
     private lateinit var playerPresenter: PlayerPresenter
     private lateinit var playerAdapter: PlayerAdapter
 
-    private lateinit var teamName : String
+    private lateinit var teamName: String
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -90,18 +88,20 @@ class PlayersFragment : Fragment(), AnkoComponent<Context>, PlayerView {
                     R.color.colorAccent,
                     android.R.color.holo_green_light,
                     android.R.color.holo_orange_light,
-                    android.R.color.holo_red_light)
+                    android.R.color.holo_red_light
+                )
 
                 relativeLayout {
                     lparams(width = matchParent, height = wrapContent)
 
                     listPlayer = recyclerView {
+                        id = R.id.listPlayer
                         lparams(width = matchParent, height = wrapContent)
                         layoutManager = LinearLayoutManager(ctx)
                     }
 
                     progressBar = progressBar {
-                    }.lparams{
+                    }.lparams {
                         centerHorizontally()
                     }
                 }

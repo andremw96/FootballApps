@@ -7,7 +7,7 @@ import com.example.wijaya_pc.footballapps.R
 import org.jetbrains.anko.*
 
 class TeamUI : AnkoComponent<ViewGroup> {
-    override fun createView(ui: AnkoContext<ViewGroup>): View = with(ui){
+    override fun createView(ui: AnkoContext<ViewGroup>): View = with(ui) {
         linearLayout {
             lparams(matchParent, wrapContent)
             padding = dip(16)
@@ -15,7 +15,7 @@ class TeamUI : AnkoComponent<ViewGroup> {
 
             imageView {
                 id = R.id.team_badge
-            }.lparams{
+            }.lparams {
                 height = dip(50)
                 width = dip(50)
             }
@@ -23,7 +23,7 @@ class TeamUI : AnkoComponent<ViewGroup> {
             textView {
                 id = R.id.team_name
                 textSize = 16f
-            }.lparams{
+            }.lparams {
                 margin = dip(15)
             }
         }

@@ -14,7 +14,8 @@ import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk15.coroutines.onClick
 
-class PlayerAdapter(private val players: List<Player>, private val listener: (Player) -> Unit) : RecyclerView.Adapter<PlayerViewHolder>() {
+class PlayerAdapter(private val players: List<Player>, private val listener: (Player) -> Unit) :
+    RecyclerView.Adapter<PlayerViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): PlayerViewHolder {
         return PlayerViewHolder(PlayerUI().createView(AnkoContext.create(parent.context, parent)))
     }
@@ -29,9 +30,9 @@ class PlayerAdapter(private val players: List<Player>, private val listener: (Pl
 
 class PlayerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    private val playerPhoto : ImageView = view.find(player_photo)
-    private val playerName : TextView = view.find(player_name)
-    private val playerPosition : TextView = view.find(player_position)
+    private val playerPhoto: ImageView = view.find(player_photo)
+    private val playerName: TextView = view.find(player_name)
+    private val playerPosition: TextView = view.find(player_position)
 
     fun bindItem(players: Player, listener: (Player) -> Unit) {
         Picasso.get().load(players.playerPhoto).placeholder(R.drawable.default_player).into(playerPhoto)

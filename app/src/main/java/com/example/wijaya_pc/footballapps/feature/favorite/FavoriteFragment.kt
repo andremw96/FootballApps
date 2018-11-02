@@ -13,13 +13,13 @@ import org.jetbrains.anko.find
 
 
 class FavoriteFragment : Fragment() {
-    private lateinit var viewPager : ViewPager
-    private lateinit var tabs : TabLayout
+    private lateinit var viewPager: ViewPager
+    private lateinit var tabs: TabLayout
 
     private lateinit var mFavoritePagerAdapter: FavoritePagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView =  inflater.inflate(R.layout.fragment_favorite, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_favorite, container, false)
 
         viewPager = rootView.find(R.id.viewPagerFavorite) as ViewPager
         tabs = rootView.find(R.id.tabsFavorite) as TabLayout

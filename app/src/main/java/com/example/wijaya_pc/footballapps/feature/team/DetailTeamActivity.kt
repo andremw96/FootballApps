@@ -38,7 +38,7 @@ import org.jetbrains.anko.setContentView
 
 class DetailTeamActivity : AppCompatActivity(), DetailTeamView {
 
-    private lateinit var progressBar : ProgressBar
+    private lateinit var progressBar: ProgressBar
     private lateinit var linearLayout: LinearLayout
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
@@ -116,7 +116,7 @@ class DetailTeamActivity : AppCompatActivity(), DetailTeamView {
 
     // apa yg dilakukan ketika menu diklik
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.home -> {
                 finish()
                 true
@@ -126,9 +126,9 @@ class DetailTeamActivity : AppCompatActivity(), DetailTeamView {
                 if (isFavorite) {
                     presenter.removeFromFavoriteTeam(ctx, teams.teamId)
                     snackbar(linearLayout, "Removed from FavoriteTeams").show()
-                }
-                else {
-                    presenter.addToFavoriteTeam(ctx,
+                } else {
+                    presenter.addToFavoriteTeam(
+                        ctx,
                         teams.teamId,
                         teams.teamName,
                         teams.teamBadge,
@@ -157,12 +157,14 @@ class DetailTeamActivity : AppCompatActivity(), DetailTeamView {
     }
 
     override fun showTeamDetail(data: List<Team>) {
-        teams = Team(data[0].teamId,
+        teams = Team(
+            data[0].teamId,
             data[0].teamName,
             data[0].teamBadge,
             data[0].teamFormedYear,
             data[0].teamStadium,
-            data[0].teamDescription)
+            data[0].teamDescription
+        )
 
         Picasso.get().load(data[0].teamBadge).into(teamBadge)
         teamName.text = data[0].teamName
@@ -181,11 +183,13 @@ class DetailTeamActivity : AppCompatActivity(), DetailTeamView {
     }
 
 
-    private fun favoriteState(){
+    private fun favoriteState() {
         databaseTeam.use {
             val result = select(FavoriteTeams.TABLE_FAVORITE_TEAMS)
-                .whereArgs("(TEAM_ID = {id})",
-                    "id" to id)
+                .whereArgs(
+                    "(TEAM_ID = {id})",
+                    "id" to id
+                )
             val favorite = result.parseList(classParser<FavoriteTeams>())
             if (!favorite.isEmpty()) isFavorite = true
         }

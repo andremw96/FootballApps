@@ -96,7 +96,8 @@ class DetailMatchActivity : AppCompatActivity(), DetailMatchView {
                     detailPresenter.removeFromFavorite(ctx, matches.matchId)
                     snackbar(detailView, "Removed from FavoriteMatches").show()
                 } else {
-                    val matchDateTime = dateTimeToSimpleString(toGMTFormat(dateToSimpleString(matches.matchDate), matches.matchTime))
+                    val matchDateTime =
+                        dateTimeToSimpleString(toGMTFormat(dateToSimpleString(matches.matchDate), matches.matchTime))
 
                     detailPresenter.addToFavorite(
                         ctx, matches.matchId,

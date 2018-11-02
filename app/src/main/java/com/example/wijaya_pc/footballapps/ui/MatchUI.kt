@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.wijaya_pc.footballapps.R
-import com.example.wijaya_pc.footballapps.invisible
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
 

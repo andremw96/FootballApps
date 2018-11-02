@@ -14,7 +14,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
-class MainPresenterTest {
+class MatchPresenterTest {
 
     @Mock
     private

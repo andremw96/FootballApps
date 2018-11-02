@@ -21,21 +21,13 @@ fun dateToSimpleString(date: Date?): String? = with(date ?: Date()) {
 }
 
 @SuppressLint("SimpleDateFormat")
-fun toGMTFormat(date: String?, time: String?): Date? {
-    val formatter = SimpleDateFormat("EEE, dd MMM yyyy HH:mm")
-    formatter.timeZone = TimeZone.getTimeZone("UTC")
-    val dateTime = "$date $time"
-    return formatter.parse(dateTime)
-}
-
-@SuppressLint("SimpleDateFormat")
 fun dateTimeToSimpleString(date: Date?): String? = with(date ?: Date()) {
     SimpleDateFormat("EEE, dd MMM yyyy HH:mm").format(this)
 }
 
 @SuppressLint("SimpleDateFormat")
-fun toGMTFormatforCalendar(date: String?, time: String?): Date? {
-    val formatter = SimpleDateFormat("yyyy/MM/dd HH:mm")
+fun toGMTFormat(date: String?, time: String?): Date? {
+    val formatter = SimpleDateFormat("EEE, dd MMM yyyy HH:mm")
     formatter.timeZone = TimeZone.getTimeZone("UTC")
     val dateTime = "$date $time"
     return formatter.parse(dateTime)
@@ -49,4 +41,12 @@ fun dateToSimpleStringforCalendar(date: Date?): String? = with(date ?: Date()) {
 @SuppressLint("SimpleDateFormat")
 fun dateTimeToSimpleStringforCalendar(date: Date?): String? = with(date ?: Date()) {
     SimpleDateFormat("yyyy/MM/dd HH:mm").format(this)
+}
+
+@SuppressLint("SimpleDateFormat")
+fun toGMTFormatforCalendar(date: String?, time: String?): Date? {
+    val formatter = SimpleDateFormat("yyyy/MM/dd HH:mm")
+    formatter.timeZone = TimeZone.getTimeZone("UTC")
+    val dateTime = "$date $time"
+    return formatter.parse(dateTime)
 }

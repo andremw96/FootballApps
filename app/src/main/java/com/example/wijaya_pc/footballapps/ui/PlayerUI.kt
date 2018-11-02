@@ -26,7 +26,7 @@ class PlayerUI : AnkoComponent<ViewGroup> {
 
                     imageView {
                         id = R.id.player_photo
-                    }.lparams(width = dip(0)){
+                    }.lparams(width = dip(0)) {
                         height = dip(50)
                         width = dip(50)
                     }
@@ -42,7 +42,7 @@ class PlayerUI : AnkoComponent<ViewGroup> {
                         id = R.id.player_position
                         textSize = 16f
                         gravity = Gravity.END
-                    }.lparams(weight = 1f, width = dip(0)){
+                    }.lparams(weight = 1f, width = dip(0)) {
                         rightMargin = dip(5)
                     }
                 }

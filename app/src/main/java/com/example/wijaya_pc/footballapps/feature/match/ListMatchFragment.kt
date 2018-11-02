@@ -1,9 +1,7 @@
 package com.example.wijaya_pc.footballapps.feature.match
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.provider.CalendarContract
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -25,8 +23,9 @@ import com.example.wijaya_pc.footballapps.visible
 import com.google.gson.Gson
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
-import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.support.v4.*
+import org.jetbrains.anko.support.v4.ctx
+import org.jetbrains.anko.support.v4.onRefresh
+import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 
 class ListMatchFragment : Fragment(), AnkoComponent<Context>, MatchView {
@@ -42,7 +41,7 @@ class ListMatchFragment : Fragment(), AnkoComponent<Context>, MatchView {
 
     private var matches: MutableList<Match> = mutableListOf()
 
-    private var leagueName : String = ""
+    private var leagueName: String = ""
 
     companion object {
         private const val ARG_SECTION_NUMBER = "section_number"
@@ -82,27 +81,109 @@ class ListMatchFragment : Fragment(), AnkoComponent<Context>, MatchView {
                 leagueName = spinner.selectedItem.toString()
 
                 if (arguments?.getInt(ARG_SECTION_NUMBER) == 0) {
-                    when(leagueName) {
-                        "English Premier League" -> { presenter.getLast15MatchesList("4328"); swipeRefresh.onRefresh { presenter.getLast15MatchesList("4328") } }
-                        "English League Championship" -> { presenter.getLast15MatchesList("4329"); swipeRefresh.onRefresh { presenter.getLast15MatchesList("4329") } }
-                        "Scottish Premier League" -> { presenter.getLast15MatchesList("4330"); swipeRefresh.onRefresh { presenter.getLast15MatchesList("4330") } }
-                        "German Bundesliga" -> { presenter.getLast15MatchesList("4331"); swipeRefresh.onRefresh { presenter.getLast15MatchesList("4331") }  }
-                        "Italian Serie A" -> { presenter.getLast15MatchesList("4332"); swipeRefresh.onRefresh { presenter.getLast15MatchesList("4332") } }
-                        "French Ligue 1" -> { presenter.getLast15MatchesList("4334"); swipeRefresh.onRefresh { presenter.getLast15MatchesList("4334") } }
-                        "Spanish La Liga" -> { presenter.getLast15MatchesList("4335"); swipeRefresh.onRefresh { presenter.getLast15MatchesList("4335") }  }
+                    when (leagueName) {
+                        "English Premier League" -> {
+                            presenter.getLast15MatchesList("4328"); swipeRefresh.onRefresh {
+                                presenter.getLast15MatchesList(
+                                    "4328"
+                                )
+                            }
+                        }
+                        "English League Championship" -> {
+                            presenter.getLast15MatchesList("4329"); swipeRefresh.onRefresh {
+                                presenter.getLast15MatchesList(
+                                    "4329"
+                                )
+                            }
+                        }
+                        "Scottish Premier League" -> {
+                            presenter.getLast15MatchesList("4330"); swipeRefresh.onRefresh {
+                                presenter.getLast15MatchesList(
+                                    "4330"
+                                )
+                            }
+                        }
+                        "German Bundesliga" -> {
+                            presenter.getLast15MatchesList("4331"); swipeRefresh.onRefresh {
+                                presenter.getLast15MatchesList(
+                                    "4331"
+                                )
+                            }
+                        }
+                        "Italian Serie A" -> {
+                            presenter.getLast15MatchesList("4332"); swipeRefresh.onRefresh {
+                                presenter.getLast15MatchesList(
+                                    "4332"
+                                )
+                            }
+                        }
+                        "French Ligue 1" -> {
+                            presenter.getLast15MatchesList("4334"); swipeRefresh.onRefresh {
+                                presenter.getLast15MatchesList(
+                                    "4334"
+                                )
+                            }
+                        }
+                        "Spanish La Liga" -> {
+                            presenter.getLast15MatchesList("4335"); swipeRefresh.onRefresh {
+                                presenter.getLast15MatchesList(
+                                    "4335"
+                                )
+                            }
+                        }
 
                     }
-                }
-                else
-                {
-                    when(leagueName) {
-                        "English Premier League" -> { presenter.getNext15MatchesList("4328"); swipeRefresh.onRefresh { presenter.getNext15MatchesList("4328") } }
-                        "English League Championship" -> { presenter.getNext15MatchesList("4329"); swipeRefresh.onRefresh { presenter.getNext15MatchesList("4329") } }
-                        "Scottish Premier League" -> { presenter.getNext15MatchesList("4330"); swipeRefresh.onRefresh { presenter.getNext15MatchesList("4330") } }
-                        "German Bundesliga" -> { presenter.getNext15MatchesList("4331"); swipeRefresh.onRefresh { presenter.getNext15MatchesList("4331") }  }
-                        "Italian Serie A" -> { presenter.getNext15MatchesList("4332"); swipeRefresh.onRefresh { presenter.getNext15MatchesList("4332") } }
-                        "French Ligue 1" -> { presenter.getNext15MatchesList("4334"); swipeRefresh.onRefresh { presenter.getNext15MatchesList("4334") } }
-                        "Spanish La Liga" -> { presenter.getNext15MatchesList("4335"); swipeRefresh.onRefresh { presenter.getNext15MatchesList("4335") }  }
+                } else {
+                    when (leagueName) {
+                        "English Premier League" -> {
+                            presenter.getNext15MatchesList("4328"); swipeRefresh.onRefresh {
+                                presenter.getNext15MatchesList(
+                                    "4328"
+                                )
+                            }
+                        }
+                        "English League Championship" -> {
+                            presenter.getNext15MatchesList("4329"); swipeRefresh.onRefresh {
+                                presenter.getNext15MatchesList(
+                                    "4329"
+                                )
+                            }
+                        }
+                        "Scottish Premier League" -> {
+                            presenter.getNext15MatchesList("4330"); swipeRefresh.onRefresh {
+                                presenter.getNext15MatchesList(
+                                    "4330"
+                                )
+                            }
+                        }
+                        "German Bundesliga" -> {
+                            presenter.getNext15MatchesList("4331"); swipeRefresh.onRefresh {
+                                presenter.getNext15MatchesList(
+                                    "4331"
+                                )
+                            }
+                        }
+                        "Italian Serie A" -> {
+                            presenter.getNext15MatchesList("4332"); swipeRefresh.onRefresh {
+                                presenter.getNext15MatchesList(
+                                    "4332"
+                                )
+                            }
+                        }
+                        "French Ligue 1" -> {
+                            presenter.getNext15MatchesList("4334"); swipeRefresh.onRefresh {
+                                presenter.getNext15MatchesList(
+                                    "4334"
+                                )
+                            }
+                        }
+                        "Spanish La Liga" -> {
+                            presenter.getNext15MatchesList("4335"); swipeRefresh.onRefresh {
+                                presenter.getNext15MatchesList(
+                                    "4335"
+                                )
+                            }
+                        }
                     }
                 }
 
@@ -125,7 +206,9 @@ class ListMatchFragment : Fragment(), AnkoComponent<Context>, MatchView {
             leftPadding = dip(16)
             rightPadding = dip(16)
 
-            spinner = spinner()
+            spinner = spinner {
+                id = R.id.spinner_match
+            }
 
             swipeRefresh = swipeRefreshLayout {
                 setColorSchemeResources(
@@ -140,6 +223,13 @@ class ListMatchFragment : Fragment(), AnkoComponent<Context>, MatchView {
 
                     listMatch = recyclerView {
                         id = R.id.listMatch
+                        if (arguments?.getInt(ARG_SECTION_NUMBER) == 0) {
+                            tag = "Last_Match"
+                        }
+                        else
+                        {
+                            tag = "Next_Match"
+                        }
                         lparams(width = matchParent, height = wrapContent)
                         layoutManager = LinearLayoutManager(ctx)
                     }

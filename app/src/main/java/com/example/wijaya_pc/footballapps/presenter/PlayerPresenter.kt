@@ -9,17 +9,19 @@ import com.google.gson.Gson
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.coroutines.experimental.bg
 
-class PlayerPresenter(private val view : PlayerView,
-                      private val apiRepository: ApiRepository,
-                      private val gson: Gson,
-                      private val context: CoroutineContextProvider = CoroutineContextProvider()
+class PlayerPresenter(
+    private val view: PlayerView,
+    private val apiRepository: ApiRepository,
+    private val gson: Gson,
+    private val context: CoroutineContextProvider = CoroutineContextProvider()
 ) {
     fun getPlayerTeam(teamName: String?) {
         view.showLoading()
 
         async(context.main) {
             val data = bg {
-                gson.fromJson(apiRepository.doRequest(TheSportDBApi.getPlayerTeam(teamName)),
+                gson.fromJson(
+                    apiRepository.doRequest(TheSportDBApi.getPlayerTeam(teamName)),
                     PlayerResponse::class.java
                 )
             }

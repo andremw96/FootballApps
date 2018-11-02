@@ -2,10 +2,10 @@ package com.example.wijaya_pc.footballapps.model
 
 import com.google.gson.annotations.SerializedName
 
-data class League (
+data class League(
     @SerializedName("idLeague")
-    var leagueId : String?,
+    var leagueId: String?,
 
     @SerializedName("strLeague")
-    var leagueName : String?
+    var leagueName: String?
 )

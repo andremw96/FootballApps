@@ -9,43 +9,34 @@ import android.support.v7.widget.SearchView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.ProgressBar
-import android.widget.Spinner
 import com.example.wijaya_pc.footballapps.R
 import com.example.wijaya_pc.footballapps.R.layout.activity_search_team
 import com.example.wijaya_pc.footballapps.adapter.TeamAdapter
 import com.example.wijaya_pc.footballapps.api.ApiRepository
 import com.example.wijaya_pc.footballapps.invisible
 import com.example.wijaya_pc.footballapps.model.Team
-import com.example.wijaya_pc.footballapps.presenter.SearchMatchPresenter
 import com.example.wijaya_pc.footballapps.presenter.SearchTeamPresenter
-import com.example.wijaya_pc.footballapps.presenter.TeamPresenter
 import com.example.wijaya_pc.footballapps.view.SearchTeamView
-import com.example.wijaya_pc.footballapps.view.TeamView
 import com.example.wijaya_pc.footballapps.visible
 import com.google.gson.Gson
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.support.v4.ctx
-import org.jetbrains.anko.support.v4.onRefresh
 
 class SearchTeamActivity : AppCompatActivity(), SearchTeamView {
 
     private lateinit var toolbar: Toolbar
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var progressBar : ProgressBar
-    private lateinit var swipeRefresh : SwipeRefreshLayout
+    private lateinit var progressBar: ProgressBar
+    private lateinit var swipeRefresh: SwipeRefreshLayout
 
-    private var teams: MutableList<Team>  = mutableListOf()
+    private var teams: MutableList<Team> = mutableListOf()
     private lateinit var teamPresenter: SearchTeamPresenter
     private lateinit var teamAdapter: TeamAdapter
 
-    private lateinit var searchView : SearchView
+    private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +57,11 @@ class SearchTeamActivity : AppCompatActivity(), SearchTeamView {
 
         recyclerView.layoutManager = LinearLayoutManager(ctx)
         teamAdapter = TeamAdapter(teams) {
-            ctx.startActivity<DetailTeamActivity>("id" to "${it.teamId}", "desc" to "${it.teamDescription}", "name" to "${it.teamName}")
+            ctx.startActivity<DetailTeamActivity>(
+                "id" to "${it.teamId}",
+                "desc" to "${it.teamDescription}",
+                "name" to "${it.teamName}"
+            )
         }
         recyclerView.adapter = teamAdapter
     }

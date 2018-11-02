@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Build
 import android.provider.CalendarContract
 import android.support.annotation.RequiresApi
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
@@ -18,8 +17,6 @@ import com.example.wijaya_pc.footballapps.ui.MatchUI
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MatchAdapter(
@@ -48,7 +45,7 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val matchAwayScore: TextView = view.find(match_away_score)
     private val matchAwayTeam: TextView = view.find(match_away_team)
 
-    private val btnToCalendar : ImageButton = view.find(btn_to_calendar)
+    private val btnToCalendar: ImageButton = view.find(btn_to_calendar)
 
     fun bindItem(matches: Match, listener: (Match) -> Unit) {
         val match_time = if (matches.matchTime == null) "00:00:00" else matches.matchTime
@@ -64,25 +61,30 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         matchAwayScore.text = matches.awayScore
         matchAwayTeam.text = matches.awayTeam
 
-        if(!(matches.homeScore.isNullOrBlank()) && !(matches.awayScore.isNullOrBlank())) {
+        if (!(matches.homeScore.isNullOrBlank()) && !(matches.awayScore.isNullOrBlank())) {
             btnToCalendar.invisible()
         }
-        
-        btnToCalendar.onClick {
-            val calendarDate = dateTimeToSimpleStringforCalendar(toGMTFormatforCalendar(dateToSimpleStringforCalendar(matches.matchDate), match_time))
-            val year = calendarDate!!.substring(0,4).toInt()
-            val month = calendarDate!!.substring(5,7).toInt()
-            val day = calendarDate!!.substring(8,10).toInt()
-            val hour = calendarDate!!.substring(11,13).toInt()
-            val minute = calendarDate!!.substring(14,16).toInt()
 
-            val startMatch : Long = Calendar.getInstance().run {
-                set(year, month-1, day, hour, minute)
+        btnToCalendar.onClick {
+            val calendarDate = dateTimeToSimpleStringforCalendar(
+                toGMTFormatforCalendar(
+                    dateToSimpleStringforCalendar(matches.matchDate),
+                    match_time
+                )
+            )
+            val year = calendarDate!!.substring(0, 4).toInt()
+            val month = calendarDate!!.substring(5, 7).toInt()
+            val day = calendarDate!!.substring(8, 10).toInt()
+            val hour = calendarDate!!.substring(11, 13).toInt()
+            val minute = calendarDate!!.substring(14, 16).toInt()
+
+            val startMatch: Long = Calendar.getInstance().run {
+                set(year, month - 1, day, hour, minute)
                 timeInMillis
             }
 
-            val endMatch : Long = Calendar.getInstance().run {
-                set(year, month-1, day, hour+2, minute)
+            val endMatch: Long = Calendar.getInstance().run {
+                set(year, month - 1, day, hour + 2, minute)
                 timeInMillis
             }
 

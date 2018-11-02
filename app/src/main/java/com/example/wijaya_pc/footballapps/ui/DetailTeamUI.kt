@@ -2,22 +2,14 @@ package com.example.wijaya_pc.footballapps.ui
 
 import android.graphics.Color
 import android.support.design.widget.TabLayout
-import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
 import com.example.wijaya_pc.footballapps.R
-import com.example.wijaya_pc.footballapps.R.color.colorAccent
-import com.example.wijaya_pc.footballapps.R.color.colorPrimary
 import com.example.wijaya_pc.footballapps.feature.team.DetailTeamActivity
 import org.jetbrains.anko.*
-import org.jetbrains.anko.design.*
-import org.jetbrains.anko.support.v4.swipeRefreshLayout
+import org.jetbrains.anko.design.themedAppBarLayout
+import org.jetbrains.anko.design.themedTabLayout
 import org.jetbrains.anko.support.v4.viewPager
 
 class DetailTeamUI : AnkoComponent<DetailTeamActivity> {
@@ -36,7 +28,7 @@ class DetailTeamUI : AnkoComponent<DetailTeamActivity> {
                     gravity = Gravity.CENTER_HORIZONTAL
 
                     //team badge
-                    imageView{
+                    imageView {
                         id = R.id.team_badgeDetailTeam
                     }.lparams(height = dip(75))
 
@@ -46,12 +38,12 @@ class DetailTeamUI : AnkoComponent<DetailTeamActivity> {
                         this.gravity = Gravity.CENTER
                         textSize = 20f
                         textColor = Color.WHITE
-                    }.lparams{
+                    }.lparams {
                         topMargin = dip(5)
                     }
 
                     //team formed year
-                    textView{
+                    textView {
                         id = R.id.team_formedyearDetailTeam
                         textColor = Color.WHITE
                         this.gravity = Gravity.CENTER
@@ -82,7 +74,7 @@ class DetailTeamUI : AnkoComponent<DetailTeamActivity> {
 
                     progressBar {
                         id = R.id.progressBarDetailTeam
-                    }.lparams{ centerHorizontally() }
+                    }.lparams { centerHorizontally() }
                 }
             }.lparams(matchParent, matchParent)
 

@@ -1,6 +1,14 @@
 package com.example.wijaya_pc.footballapps.model
 
-data class FavoriteTeams(val id: Long?, val teamId: String?, val teamName: String?, val teamBadge: String?, val teamFormedYear: String?, val teamStadium: String?,  val teamDescription: String?) {
+data class FavoriteTeams(
+    val id: Long?,
+    val teamId: String?,
+    val teamName: String?,
+    val teamBadge: String?,
+    val teamFormedYear: String?,
+    val teamStadium: String?,
+    val teamDescription: String?
+) {
 
     companion object {
         const val TABLE_FAVORITE_TEAMS: String = "TABLE_FAVORITE_TEAMS"

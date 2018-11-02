@@ -2,7 +2,6 @@ package com.example.wijaya_pc.footballapps.ui
 
 import android.support.v4.content.ContextCompat
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.wijaya_pc.footballapps.R
 import com.example.wijaya_pc.footballapps.feature.match.SearchMatchActivity
@@ -28,7 +27,8 @@ class SearchUI : AnkoComponent<SearchMatchActivity> {
                     R.color.colorAccent,
                     android.R.color.holo_green_light,
                     android.R.color.holo_orange_light,
-                    android.R.color.holo_red_light)
+                    android.R.color.holo_red_light
+                )
 
                 relativeLayout {
                     lparams(width = matchParent, height = wrapContent)
@@ -40,7 +40,7 @@ class SearchUI : AnkoComponent<SearchMatchActivity> {
 
                     progressBar {
                         id = R.id.progress_bar_search
-                    }.lparams{
+                    }.lparams {
                         centerHorizontally()
                     }
                 }
