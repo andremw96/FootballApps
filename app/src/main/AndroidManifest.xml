@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.wijaya_pc.footballapps">
+          package="com.kade.dicoding.footballapps">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -11,23 +11,23 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".feature.main.MainActivity">
+        <activity android:name="com.kade.dicoding.footballapps.feature.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".feature.match.DetailMatchActivity">
+        <activity android:name="com.kade.dicoding.footballapps.feature.match.DetailMatchActivity">
         </activity>
-        <activity android:name=".feature.team.DetailTeamActivity">
+        <activity android:name="com.kade.dicoding.footballapps.feature.team.DetailTeamActivity">
         </activity>
-        <activity android:name=".feature.player.DetailPlayerActivity">
+        <activity android:name="com.kade.dicoding.footballapps.feature.player.DetailPlayerActivity">
         </activity>
-        <activity android:name=".feature.match.SearchMatchActivity"
+        <activity android:name="com.kade.dicoding.footballapps.feature.match.SearchMatchActivity"
                   android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".feature.team.SearchTeamActivity"
+        <activity android:name="com.kade.dicoding.footballapps.feature.team.SearchTeamActivity"
                   android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
