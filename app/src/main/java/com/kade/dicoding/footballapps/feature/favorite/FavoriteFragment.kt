@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.kade.dicoding.footballapps.R
 import com.kade.dicoding.footballapps.adapter.pager.FavoritePagerAdapter
+import org.jetbrains.anko.find
 
 
 class FavoriteFragment : Fragment() {

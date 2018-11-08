@@ -1,7 +1,7 @@
 package com.kade.dicoding.footballapps
 
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.Espresso.pressBack
+import android.support.test.espresso.Espresso.*
+import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
 import android.support.test.espresso.action.ViewActions.click
@@ -17,9 +17,12 @@ import android.view.View
 import android.widget.ImageButton
 import com.kade.dicoding.footballapps.R.id.*
 import com.kade.dicoding.footballapps.feature.main.MainActivity
+import com.kade.dicoding.footballapps.idling.IdlingResource
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.Matcher
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,14 +30,26 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
+    var idlingResource: IdlingResource? = null
+
     @Rule
     @JvmField
     var activityRule = ActivityTestRule(MainActivity::class.java)
 
+    @Before
+    fun setUp() {
+        idlingResource = IdlingResource(2000)
+        IdlingRegistry.getInstance().register(idlingResource)
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(idlingResource)
+    }
+
+
     @Test
     fun testRecyclerViewLastMatch() {
-        Thread.sleep(2000)
-
         onView(allOf(withTagValue(`is`("Last_Match" as Any)), withId(listMatch))).check(matches(isDisplayed()))
 
         onView(
@@ -43,14 +58,14 @@ class MainActivityTest {
                 withId(listMatch)
             )
         ).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(14))
-        Thread.sleep(2000)
+
         onView(
             allOf(
                 withTagValue(`is`("Last_Match" as Any)),
                 withId(listMatch)
             )
         ).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(1))
-        Thread.sleep(2000)
+
         onView(
             allOf(
                 withTagValue(`is`("Last_Match" as Any)),
@@ -61,8 +76,6 @@ class MainActivityTest {
 
     @Test
     fun testRecyclerViewNextMatch() {
-        Thread.sleep(2000)
-
         onView(withId(tabs)).check(matches(isDisplayed()))
 
         onView(withContentDescription("Next Match")).check(matches(isDisplayed()))
@@ -76,14 +89,14 @@ class MainActivityTest {
                 withId(listMatch)
             )
         ).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(3))
-        Thread.sleep(2000)
+
         onView(
             allOf(
                 withTagValue(`is`("Next_Match" as Any)),
                 withId(listMatch)
             )
         ).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(7))
-        Thread.sleep(2000)
+
         onView(
             allOf(
                 withTagValue(`is`("Next_Match" as Any)),
@@ -94,7 +107,6 @@ class MainActivityTest {
 
     @Test
     fun testRecyclerViewFavMatch() {
-        Thread.sleep(2000)
 
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.favorites)).perform(click())
@@ -107,14 +119,14 @@ class MainActivityTest {
                 withId(listFav)
             )
         ).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(14))
-        Thread.sleep(2000)
+
         onView(
             allOf(
                 withTagValue(`is`("fav_match" as Any)),
                 withId(listFav)
             )
         ).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(1))
-        Thread.sleep(2000)
+
         onView(
             allOf(
                 withTagValue(`is`("fav_match" as Any)),
@@ -125,7 +137,6 @@ class MainActivityTest {
 
     @Test
     fun testRecyclerViewFavTeam() {
-        Thread.sleep(2000)
 
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.favorites)).perform(click())
@@ -136,7 +147,6 @@ class MainActivityTest {
         onView(withContentDescription("Team")).perform(click())
 
         onView(allOf(withTagValue(`is`("fav_team" as Any)), withId(listFav))).check(matches(isDisplayed()))
-        Thread.sleep(2000)
 
         onView(
             allOf(
@@ -144,14 +154,14 @@ class MainActivityTest {
                 withId(listFav)
             )
         ).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
-        Thread.sleep(2000)
+
         onView(
             allOf(
                 withTagValue(`is`("fav_team" as Any)),
                 withId(listFav)
             )
         ).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(0))
-        Thread.sleep(2000)
+
         onView(
             allOf(
                 withTagValue(`is`("fav_team" as Any)),
@@ -162,19 +172,16 @@ class MainActivityTest {
 
     @Test
     fun testRecyclerViewTeam() {
-        Thread.sleep(2000)
 
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.tab_teams)).perform(click())
 
-        Thread.sleep(2000)
-
         onView(withId(listTeam)).check(matches(isDisplayed()))
-        Thread.sleep(2000)
+
         onView(withId(listTeam)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(7))
-        Thread.sleep(2000)
+
         onView(withId(listTeam)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(3))
-        Thread.sleep(2000)
+
         onView(withId(listTeam)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 3,
@@ -185,18 +192,17 @@ class MainActivityTest {
         pressBack()
 
         onView(ViewMatchers.withId(listTeam)).check(matches(isDisplayed()))
-        Thread.sleep(2000)
 
         onView(withId(spinner_teams)).check(matches(isDisplayed()))
         onView(withId(spinner_teams)).perform(click())
         onView(withText("Spanish La Liga")).perform(click())
 
         onView(withId(listTeam)).check(matches(isDisplayed()))
-        Thread.sleep(2000)
+
         onView(withId(listTeam)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
-        Thread.sleep(2000)
+
         onView(withId(listTeam)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(1))
-        Thread.sleep(2000)
+
         onView(withId(listTeam)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 1,
@@ -207,43 +213,34 @@ class MainActivityTest {
 
     @Test
     fun testFavoriteTeam() {
-        Thread.sleep(2000)
 
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.tab_teams)).perform(click())
 
-        Thread.sleep(2000)
-
         onView(withId(listTeam)).check(matches(isDisplayed()))
-        Thread.sleep(2000)
+
         onView(withId(listTeam)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 3,
                 click()
             )
         )
-        Thread.sleep(2000)
 
         onView(withId(add_to_favorite)).check(matches(isDisplayed()))
         onView(withId(add_to_favorite)).perform(click())
         onView(ViewMatchers.withText("Added to FavoriteTeams")).check(matches(isDisplayed()))
-        Thread.sleep(2000)
 
         onView(withId(add_to_favorite)).check(matches(isDisplayed()))
-        Thread.sleep(2000)
+
         onView(withId(add_to_favorite)).perform(click())
-        Thread.sleep(2000)
+
         onView(ViewMatchers.withText("Removed from FavoriteTeams")).check(matches(isDisplayed()))
-        Thread.sleep(2000)
     }
 
     @Test
     fun testFavoriteLastMatch() {
-        Thread.sleep(2000)
 
         onView(allOf(withTagValue(`is`("Last_Match" as Any)), withId(listMatch))).check(matches(isDisplayed()))
-
-        Thread.sleep(2000)
 
         onView(
             allOf(
@@ -252,33 +249,26 @@ class MainActivityTest {
             )
         ).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
 
-        Thread.sleep(2000)
-
         onView(withId(add_to_favorite)).check(matches(isDisplayed()))
         onView(withId(add_to_favorite)).perform(click())
         onView(ViewMatchers.withText("Added to FavoriteMatches")).check(matches(isDisplayed()))
-        Thread.sleep(2000)
 
         onView(withId(add_to_favorite)).check(matches(isDisplayed()))
-        Thread.sleep(2000)
+
         onView(withId(add_to_favorite)).perform(click())
-        Thread.sleep(2000)
+
         onView(ViewMatchers.withText("Removed from FavoriteMatches")).check(matches(isDisplayed()))
-        Thread.sleep(2000)
+
     }
 
     @Test
     fun testFavoriteNextMatch() {
-        Thread.sleep(2000)
-
         onView(withId(tabs)).check(matches(isDisplayed()))
 
         onView(withContentDescription("Next Match")).check(matches(isDisplayed()))
         onView(withContentDescription("Next Match")).perform(click())
 
         onView(allOf(withTagValue(`is`("Next_Match" as Any)), withId(listMatch))).check(matches(isDisplayed()))
-
-        Thread.sleep(2000)
 
         onView(
             allOf(
@@ -287,32 +277,25 @@ class MainActivityTest {
             )
         ).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
 
-        Thread.sleep(2000)
-
         onView(withId(add_to_favorite)).check(matches(isDisplayed()))
         onView(withId(add_to_favorite)).perform(click())
         onView(ViewMatchers.withText("Added to FavoriteMatches")).check(matches(isDisplayed()))
-        Thread.sleep(2000)
 
         onView(withId(add_to_favorite)).check(matches(isDisplayed()))
-        Thread.sleep(2000)
+
         onView(withId(add_to_favorite)).perform(click())
-        Thread.sleep(2000)
+
         onView(ViewMatchers.withText("Removed from FavoriteMatches")).check(matches(isDisplayed()))
-        Thread.sleep(2000)
+
     }
 
     @Test
     fun testDetailViewTeam() {
-        Thread.sleep(2000)
-
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.tab_teams)).perform(click())
 
-        Thread.sleep(2000)
-
         onView(withId(listTeam)).check(matches(isDisplayed()))
-        Thread.sleep(2000)
+
         onView(withId(listTeam)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,
@@ -322,18 +305,17 @@ class MainActivityTest {
 
         onView(withId(tabs_detail_team)).check(matches(isDisplayed()))
         onView(withContentDescription("Overview")).check(matches(isDisplayed()))
-        Thread.sleep(2000)
 
         onView(withContentDescription("Players")).check(matches(isDisplayed()))
-        Thread.sleep(2000)
+
         onView(withContentDescription("Players")).perform(click())
 
         onView(withId(listPlayer)).check(matches(isDisplayed()))
-        Thread.sleep(2000)
+
         onView(withId(listPlayer)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(10))
-        Thread.sleep(2000)
+
         onView(withId(listPlayer)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(0))
-        Thread.sleep(2000)
+
         onView(withId(listPlayer)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,
@@ -344,8 +326,6 @@ class MainActivityTest {
 
     @Test
     fun testAddMatchToCalendar() {
-        Thread.sleep(2000)
-
         onView(withId(tabs)).check(matches(isDisplayed()))
 
         onView(withContentDescription("Next Match")).check(matches(isDisplayed()))
@@ -368,12 +348,8 @@ class MainActivityTest {
 
     @Test
     fun testSearchTeam() {
-        Thread.sleep(1000)
-
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()))
         onView(withId(R.id.tab_teams)).perform(click())
-
-        Thread.sleep(1000)
 
         onView(withId(button_search)).check(matches(isDisplayed()))
         onView(withId(button_search)).perform(click())
@@ -383,10 +359,8 @@ class MainActivityTest {
             typeSearchViewText("Chelsea")
         )
 
-        Thread.sleep(1000)
-
         onView(withId(rv_search_team)).check(matches(isDisplayed()))
-        Thread.sleep(1000)
+
         onView(withId(rv_search_team)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,
@@ -398,8 +372,6 @@ class MainActivityTest {
 
     @Test
     fun testSearchMatch() {
-        Thread.sleep(1000)
-
         onView(withId(button_search)).check(matches(isDisplayed()))
         onView(withId(button_search)).perform(click())
 
@@ -408,10 +380,8 @@ class MainActivityTest {
             typeSearchViewText("Chelsea")
         )
 
-        Thread.sleep(1000)
-
         onView(withId(rv_search)).check(matches(isDisplayed()))
-        Thread.sleep(1000)
+
         onView(withId(rv_search)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,

@@ -8,6 +8,7 @@ import android.view.*
 import com.kade.dicoding.footballapps.R
 import com.kade.dicoding.footballapps.R.id.button_search
 import com.kade.dicoding.footballapps.adapter.pager.MatchPagerAdapter
+import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 
